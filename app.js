@@ -5,26 +5,52 @@ const bodyParser = require('body-parser');
 const User = require('./models/user');
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
-
+const session = require('express-session');
 
 
 mongoose.connect('mongodb://dax:password@ds123722.mlab.com:23722/webdevqna');
 const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(require("express-session")({
+app.use(session({
     secret: "asdgasgsafhsdhh",
     resave: false,
     saveUninitialized: false
 }));
-
-
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use(express.static('public'));
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+let server;
+
+function runServer() {
+	const port = process.env.PORT || 8080;
+	return new Promise((resolve, reject) => {
+		server = app.listen(port, () => {
+			console.log(`Your app is listening on port ${port}`);
+			resolve(server);
+		}).on('error', err => {
+			reject(err)
+		});
+	});
+}
+
+function closeServer() {
+  return new Promise((resolve, reject) => {
+    console.log('Closing server');
+    server.close(err => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    });
+  });
+}
 
 //============
 // ROUTES
@@ -47,17 +73,16 @@ app.get("/register", function(req, res){
 
 //handling user sign up
 app.post("/register", function(req, res){
-	req.body.username
-	req.body.password
-  User.register(new User({username: req.body.username}), req.body.password, function(err, user){
-    if(err){
-      console.log(err);
-      return res.render('register');
-    }
-    passport.authenticate("local")(req, res, function(){
-      res.redirect("/secret");
-    });
-  });
+	var newUser = new User({username: req.body.username});
+	User.register(newUser, req.body.password, function(err, user){
+		if(err){
+			console.log(err);
+			return res.render("register");
+		}
+		passport.authenticate("local")(req, res, function(){
+			res.redirect("/secret");
+		});
+	});
 });
 
 // LOGIN ROUTES
@@ -65,11 +90,10 @@ app.post("/register", function(req, res){
 app.get("/login", function(req, res){
    res.render("login"); 
 });
-//login logic
-//middleware
+//login logic middleware
 app.post("/login", passport.authenticate("local", {
-    successRedirect: "/secret",
-    failureRedirect: "/login"
+	successRedirect: "/secret",
+	failureRedirect: "/login"
 }) ,function(req, res){
 });
 
@@ -86,10 +110,15 @@ function isLoggedIn(req, res, next){
     res.redirect("/login");
 }
 
+if (require.main === module) {
+  runServer().catch(err => console.error(err));
+};
 
-app.listen(process.env.PORT || 8080, function() {
-	console.log('server started.......');
-});
+module.exports = {app, runServer, closeServer};
+
+// app.listen(process.env.PORT || 8080, function() {
+// 	console.log('server started.......');
+// });
 
 
 
