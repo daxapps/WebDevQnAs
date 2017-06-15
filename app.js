@@ -2,15 +2,23 @@ const express = require("express");
 const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 const User = require('./models/user');
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require('express-session');
 
+const {DATABASE_URL, PORT} = require('./config');
+const {Account} = require('./models/user');
+const {routes, app} = require('./routes/index');
 
 mongoose.connect('mongodb://dax:password@ds123722.mlab.com:23722/webdevqna');
-const app = express();
+// const app = express();
+app.set('views', './views');
 app.set('view engine', 'ejs');
+// log the http layer
+app.use(morgan('common'));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
     secret: "asdgasgsafhsdhh",
@@ -19,11 +27,18 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/', routes);
 // app.use(express.static('public'));
 
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+mongoose.Promise = global.Promise;
+
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+// app.use('*', function(req, res) {
+//   res.status(404).json({message: 'Not Found'});
+// });
 
 let server;
 
@@ -50,65 +65,7 @@ function closeServer() {
       resolve();
     });
   });
-}
-
-//============
-// ROUTES
-//============
-
-app.get('/', function(req, res) {
-	res.render("home");
-});
-
-app.get('/secret', isLoggedIn, function(req, res) {
-	res.render('secret');
-})
-
-// Auth Routes
-
-//show sign up form
-app.get("/register", function(req, res){
-   res.render("register"); 
-});
-
-//handling user sign up
-app.post("/register", function(req, res){
-	var newUser = new User({username: req.body.username});
-	User.register(newUser, req.body.password, function(err, user){
-		if(err){
-			console.log(err);
-			return res.render("register");
-		}
-		passport.authenticate("local")(req, res, function(){
-			res.redirect("/secret");
-		});
-	});
-});
-
-// LOGIN ROUTES
-//render login form
-app.get("/login", function(req, res){
-   res.render("login"); 
-});
-//login logic middleware
-app.post("/login", passport.authenticate("local", {
-	successRedirect: "/secret",
-	failureRedirect: "/login"
-}) ,function(req, res){
-});
-
-app.get("/logout", function(req, res){
-    req.logout();
-    res.redirect("/");
-});
-
-// prevents access to /secret
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
+};
 
 if (require.main === module) {
   runServer().catch(err => console.error(err));
@@ -116,9 +73,6 @@ if (require.main === module) {
 
 module.exports = {app, runServer, closeServer};
 
-// app.listen(process.env.PORT || 8080, function() {
-// 	console.log('server started.......');
-// });
 
 
 
