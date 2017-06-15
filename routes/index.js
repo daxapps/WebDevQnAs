@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-const {Account} = require('../models/user');
+const {User} = require('../models/user');
 // const Entry = require('../models/entry');
 
 const router = express.Router();
@@ -28,8 +28,8 @@ router.get("/register", function(req, res){
 
 //handling user sign up
 router.post("/register", function(req, res){
-	var newUser = new Account({username: req.body.username});
-	Account.register(newUser, req.body.password, function(err, user){
+	var newUser = new User({username: req.body.username});
+	User.register(newUser, req.body.password, function(err, user){
 		if(err){
 			console.log(err);
 			return res.render("register");
@@ -68,3 +68,6 @@ function isLoggedIn(req, res, next){
 ///module.exports = router;
 var routes = router;
 module.exports = {routes, app};
+
+
+

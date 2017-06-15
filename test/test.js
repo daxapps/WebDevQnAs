@@ -1,21 +1,50 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../app.js');
+const mongoose = require('mongoose');
 
 const should = chai.should();
-const app = server.app;
-const storage = server.storage;
+
+const {User} = require('../models/user');
+const {app, runServer, closeServer} = require('../app');
+const {TEST_DATABASE_URL} = require('../config');
 
 chai.use(chaiHttp);
+const request = require('supertest');
+const api = request(app);
+const authUser = request.agent(app);
 
-describe('index page', function() {
-  it('exists', function(done) {
-    chai.request(app)
-      .get('/')
-      .end(function(err, res) {
-        res.should.have.status(200);
-        res.should.be.html;
-        done();
-    });
-  });
+function tearDownDb() {
+	console.warn('Deleting database');
+	return mongoose.connection.dropDatabase();
+}
+
+describe('Tests', function() {
+  	this.timeout(15000);
+
+	before(function() {
+		return runServer(TEST_DATABASE_URL); 
+	});
+
+	after(function() {
+		tearDownDb();
+		return closeServer();
+	});
+
+	describe('testing user authentication', () => {
+		it('should create a user', () => {
+			return api
+				.post('/register')
+				.send({username:'dax2000', password: 'test'})
+				.expect(302)
+		});
+	});
 });
+
+
+
+
+
+
+
+
+

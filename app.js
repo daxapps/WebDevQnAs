@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const User = require('./models/user');
+// const User = require('./models/user');
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require('express-session');
 
 const {DATABASE_URL, PORT} = require('./config');
-const {Account} = require('./models/user');
+const {User} = require('./models/user');
 const {routes, app} = require('./routes/index');
 
 mongoose.connect('mongodb://dax:password@ds123722.mlab.com:23722/webdevqna');
@@ -32,9 +32,9 @@ app.use('/', routes);
 
 mongoose.Promise = global.Promise;
 
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // app.use('*', function(req, res) {
 //   res.status(404).json({message: 'Not Found'});
