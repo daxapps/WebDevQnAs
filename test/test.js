@@ -38,6 +38,15 @@ describe('Tests', function() {
 				.expect(302)
 		});
 	});
+
+	describe('login a user', () => {
+		it('should login a user', () => {
+			return api
+				.post('/login')
+				.send({username: 'dax2000', password: 'test'})
+				.expect(302)
+		});
+	});
 });
 
 
