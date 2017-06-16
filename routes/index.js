@@ -15,8 +15,8 @@ router.get('/', (req, res) => {
   res.render('home');
 });
 
-router.get('/secret', isLoggedIn, function(req, res) {
-	res.render('secret');
+router.get('/qnas', isLoggedIn, function(req, res) {
+	res.render('qnas');
 });
 
 // Auth Routes
@@ -35,7 +35,7 @@ router.post("/register", function(req, res){
 			return res.render("register");
 		}
 		passport.authenticate("local")(req, res, function(){
-			res.redirect("/secret");
+			res.redirect("/qnas");
 		});
 	});
 });
@@ -47,7 +47,7 @@ router.get("/login", function(req, res){
 });
 //login logic middleware
 router.post("/login", passport.authenticate("local", {
-	successRedirect: "/secret",
+	successRedirect: "/qnas",
 	failureRedirect: "/login"
 }) ,function(req, res){
 });

@@ -15,7 +15,7 @@ const {routes, app} = require('./routes/index');
 mongoose.connect('mongodb://dax:password@ds123722.mlab.com:23722/webdevqna');
 // const app = express();
 app.set('views', './views');
-app.set('view engine', 'ejs');
+app.set('view engine', 'hbs');
 // log the http layer
 app.use(morgan('common'));
 app.use(bodyParser.json());
