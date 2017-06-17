@@ -3,16 +3,16 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-// const User = require('./models/user');
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require('express-session');
 
-const {DATABASE_URL, PORT} = require('./config');
+const {DATABASE_URL, TEST_DATABASE_URL, PORT} = require('./config');
 const {User} = require('./models/user');
 const {routes, app} = require('./routes/index');
 
-mongoose.connect('mongodb://dax:password@ds123722.mlab.com:23722/webdevqna');
+mongoose.Promise = global.Promise;
+
 // const app = express();
 app.set('views', './views');
 app.set('view engine', 'hbs');
@@ -30,43 +30,40 @@ app.use(passport.session());
 app.use('/', routes);
 // app.use(express.static('public'));
 
-mongoose.Promise = global.Promise;
-
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// app.use('*', function(req, res) {
-//   res.status(404).json({message: 'Not Found'});
-// });
-
 let server;
 
-function runServer() {
+function runServer(databaseUrl) {
 	const port = process.env.PORT || 8080;
 	return new Promise((resolve, reject) => {
-		server = app.listen(port, () => {
-			console.log(`Your app is listening on port ${port}`);
-			resolve(server);
-		}).on('error', err => {
-			reject(err)
-		});
-	});
+    mongoose.connect(databaseUrl, err => {
+      server = app.listen(port, () => {
+       console.log(`Your app is listening on port ${port}`);
+       resolve(server);
+     }).on('error', err => {
+      mongoose.disconnect();
+      reject(err)
+    });
+   });
+  });
 }
 
 function closeServer() {
-  return new Promise((resolve, reject) => {
-    console.log('Closing server');
-    server.close(err => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve();
-    });
+  return mongoose.disconnect().then(() => {
+     return new Promise((resolve, reject) => {
+       console.log('Closing server');
+       server.close(err => {
+           if (err) {
+               return reject(err);
+           }
+           resolve();
+       });
+     });
   });
-};
-
+}
 if (require.main === module) {
   runServer().catch(err => console.error(err));
 };

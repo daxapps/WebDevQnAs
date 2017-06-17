@@ -57,6 +57,11 @@ router.get("/logout", function(req, res){
     res.redirect("/");
 });
 
+// // catch-all endpoint if client makes request to non-existent endpoint
+// app.use('*', function(req, res) {
+//   res.status(404).json({message: 'Not Found'});
+// });
+
 // prevents access to /secret
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){

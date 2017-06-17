@@ -15,6 +15,7 @@ const authUser = request.agent(app);
 
 function tearDownDb() {
 	console.warn('Deleting database');
+	console.log("#####" + mongoose.connection)
 	return mongoose.connection.dropDatabase();
 }
 
@@ -22,6 +23,8 @@ describe('Tests', function() {
   	this.timeout(15000);
 
 	before(function() {
+  		console.log("test DB: " + TEST_DATABASE_URL)
+
 		return runServer(TEST_DATABASE_URL); 
 	});
 
