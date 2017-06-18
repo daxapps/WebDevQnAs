@@ -13,7 +13,6 @@ const {routes, app} = require('./routes/index');
 
 mongoose.Promise = global.Promise;
 
-// const app = express();
 app.set('views', './views');
 app.set('view engine', 'hbs');
 // log the http layer

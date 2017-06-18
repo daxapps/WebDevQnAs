@@ -1,15 +1,10 @@
 const express = require('express');
 const passport = require('passport');
-const {User} = require('../models/user');
+const {User, Qna} = require('../models/user');
 // const Entry = require('../models/entry');
 
 const router = express.Router();
 const app = express();
-
-//GET /
-// router.get('/', (req, res) => {
-//     res.render('index', {user: req.user});
-// });
 
 router.get('/', (req, res) => {
   res.render('home');
@@ -35,6 +30,7 @@ router.post("/register", function(req, res){
 			return res.render("register");
 		}
 		passport.authenticate("local")(req, res, function(){
+      req.flash("success", "Welcome to Web Dev Interview Q&A's " + user.username);
 			res.redirect("/qnas");
 		});
 	});
@@ -54,21 +50,55 @@ router.post("/login", passport.authenticate("local", {
 
 router.get("/logout", function(req, res){
     req.logout();
+   	req.flash("success", "Logged you out!");
     res.redirect("/");
 });
 
-// // catch-all endpoint if client makes request to non-existent endpoint
-// app.use('*', function(req, res) {
-//   res.status(404).json({message: 'Not Found'});
-// });
-
-// prevents access to /secret
+// prevents access to /qnas
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
     res.redirect("/login");
 }
+
+//QNAS ROUTES
+router.get('/qnas', (req, res) => {
+	Qna.find({}, function(err, allQnas){
+		if(err){
+           console.log(err);
+       } else {
+          res.render("views/qnas",{qnas:allCQnas, page: 'qnas'});
+       }
+	});
+});
+
+router.post('/qnas', isLoggedIn, (req, res) => {
+	var question = req.body.question;
+	var answer = req.body.answer;
+	var author = {
+        id: req.user._id,
+        username: req.user.username
+    };
+   var newQna = {question: question, answer: answer, author: author};
+   Qna.create(newQna, function(err, newlyCreated){
+        if(err){
+            console.log(err);
+        } else {
+            //redirect back to campgrounds page
+            console.log(newlyCreated);
+            res.redirect("/qnas");
+        }
+    });
+ 
+});
+
+
+
+// // catch-all endpoint if client makes request to non-existent endpoint
+// app.use('*', function(req, res) {
+//   res.status(404).json({message: 'Not Found'});
+// });
 
 ///module.exports = router;
 var routes = router;
