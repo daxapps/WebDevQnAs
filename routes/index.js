@@ -1,18 +1,27 @@
 const express = require('express');
 const passport = require('passport');
 const {User, Qna} = require('../models/user');
+
 // const Entry = require('../models/entry');
 
 const router = express.Router();
 const app = express();
 
 router.get('/', (req, res) => {
-  res.render('home');
+  Qna.find({}, function(err, allQnas){
+    console.log(Qna)
+    if(err){
+      console.log(err);
+    } else {
+      res.render("home",{qnas:allQnas, page: 'home'});
+    }
+  });
+  // res.render('home');
 });
 
-router.get('/qnas', isLoggedIn, function(req, res) {
-	res.render('qnas');
-});
+// router.get('/qnas', isLoggedIn, function(req, res) {
+// 	res.render('qnas');
+// });
 
 // Auth Routes
 //show sign up form
@@ -30,7 +39,7 @@ router.post("/register", function(req, res){
 			return res.render("register");
 		}
 		passport.authenticate("local")(req, res, function(){
-      req.flash("success", "Welcome to Web Dev Interview Q&A's " + user.username);
+      // req.flash("success", "Welcome to Web Dev Interview Q&A's " + user.username);
 			res.redirect("/qnas");
 		});
 	});
@@ -65,11 +74,12 @@ function isLoggedIn(req, res, next){
 //QNAS ROUTES
 router.get('/qnas', (req, res) => {
 	Qna.find({}, function(err, allQnas){
+    console.log(Qna)
 		if(err){
-           console.log(err);
-       } else {
-          res.render("views/qnas",{qnas:allCQnas, page: 'qnas'});
-       }
+      console.log(err);
+    } else {
+      res.render("qnas",{qnas:allQnas, page: 'qnas'});
+    }
 	});
 });
 
@@ -85,7 +95,7 @@ router.post('/qnas', isLoggedIn, (req, res) => {
         if(err){
             console.log(err);
         } else {
-            //redirect back to campgrounds page
+            //redirect back to home page
             console.log(newlyCreated);
             res.redirect("/qnas");
         }

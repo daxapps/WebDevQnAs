@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
+const ejs = require("ejs");
 
 const UserSchema = new mongoose.Schema({
     username: String,
@@ -24,7 +25,7 @@ QnaSchema.methods.apiRepr = function() {
 		id: this._id,
 		question: this.question,
 		answer: this.answer,
-		author: user._id
+		author: user ._id
 	};
 }
 

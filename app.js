@@ -6,19 +6,22 @@ const morgan = require('morgan');
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require('express-session');
+const ejs = require('ejs');
 
 const {DATABASE_URL, TEST_DATABASE_URL, PORT} = require('./config');
-const {User} = require('./models/user');
+const {User, Qna} = require('./models/user');
 const {routes, app} = require('./routes/index');
 
 mongoose.Promise = global.Promise;
 
-app.set('views', './views');
-app.set('view engine', 'hbs');
+app.set('views', 'views');
+app.set('view engine', 'ejs');
 // log the http layer
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('public'));
+
 app.use(session({
     secret: "asdgasgsafhsdhh",
     resave: false,
