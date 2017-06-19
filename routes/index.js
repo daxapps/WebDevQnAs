@@ -16,12 +16,9 @@ router.get('/', (req, res) => {
       res.render("home",{qnas:allQnas, page: 'home'});
     }
   });
-  // res.render('home');
 });
 
-// router.get('/qnas', isLoggedIn, function(req, res) {
-// 	res.render('qnas');
-// });
+
 
 // Auth Routes
 //show sign up form
@@ -40,7 +37,7 @@ router.post("/register", function(req, res){
 		}
 		passport.authenticate("local")(req, res, function(){
       // req.flash("success", "Welcome to Web Dev Interview Q&A's " + user.username);
-			res.redirect("/qnas");
+			res.redirect("/home");
 		});
 	});
 });
@@ -52,7 +49,7 @@ router.get("/login", function(req, res){
 });
 //login logic middleware
 router.post("/login", passport.authenticate("local", {
-	successRedirect: "/qnas",
+	successRedirect: "/",
 	failureRedirect: "/login"
 }) ,function(req, res){
 });
@@ -71,19 +68,19 @@ function isLoggedIn(req, res, next){
     res.redirect("/login");
 }
 
-//QNAS ROUTES
-router.get('/qnas', (req, res) => {
+//ADD QnA ROUTES
+router.get('/new', (req, res) => {
 	Qna.find({}, function(err, allQnas){
     console.log(Qna)
 		if(err){
       console.log(err);
     } else {
-      res.render("qnas",{qnas:allQnas, page: 'qnas'});
+      res.render("new",{qnas:allQnas, page: 'new'});
     }
 	});
 });
 
-router.post('/qnas', isLoggedIn, (req, res) => {
+router.post('/new', isLoggedIn, (req, res) => {
 	var question = req.body.question;
 	var answer = req.body.answer;
 	var author = {
@@ -97,10 +94,9 @@ router.post('/qnas', isLoggedIn, (req, res) => {
         } else {
             //redirect back to home page
             console.log(newlyCreated);
-            res.redirect("/qnas");
+            res.redirect("/");
         }
     });
- 
 });
 
 
