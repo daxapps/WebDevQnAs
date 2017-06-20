@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema({
 const QnaSchema = new mongoose.Schema({
 	question: String,
 	answer: String,
+	source: String,
 	author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,
@@ -25,7 +26,9 @@ QnaSchema.methods.apiRepr = function() {
 		id: this._id,
 		question: this.question,
 		answer: this.answer,
+		source: this.source,
 		author: user._id
+
 	};
 }
 

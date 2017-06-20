@@ -36,7 +36,7 @@ router.post("/register", function(req, res){
 			return res.render("register");
 		}
 		passport.authenticate("local")(req, res, function(){
-      // req.flash("success", "Welcome to Web Dev Interview Q&A's " + user.username);
+      req.flash("success", "Welcome to Web Dev Interview Q&A's " + user.username);
 			res.redirect("/home");
 		});
 	});
@@ -74,12 +74,13 @@ router.get('/new', (req, res) => {
 
 router.post('/new', (req, res) => {
 	var question = req.body.question;
-	var answer = req.body.answer;
+  var answer = req.body.answer;
+	var source = req.body.source;
 	var author = {
         id: req.user._id,
         username: req.user.username
     };
-   var newQna = {question: question, answer: answer, author: author};
+   var newQna = {question: question, answer: answer, source: source, author: author};
    Qna.create(newQna, function(err, newlyCreated){
         if(err){
             console.log(err);
