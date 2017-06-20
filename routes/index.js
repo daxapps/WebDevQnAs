@@ -72,7 +72,7 @@ router.get('/new', (req, res) => {
 	});
 });
 
-router.post('/new', middleware.isLoggedIn, (req, res) => {
+router.post('/new', (req, res) => {
 	var question = req.body.question;
 	var answer = req.body.answer;
 	var author = {
@@ -91,27 +91,14 @@ router.post('/new', middleware.isLoggedIn, (req, res) => {
     });
 });
 
-// EDIT CAMPGROUND ROUTE
-// router.get("/:id", function(req, res){
-//     //find the campground with provided ID
-//     Qna.findById(req.params.id).exec(function(err, foundQuestion){
-//         if(err){
-//             console.log(err);
-//         } else {
-//             console.log(foundQuestion)
-//             //render show template with that campground
-//             res.render("edit", {qnas: foundQuestion});
-//         }
-//     });
-// });
-
+// EDIT QnA ROUTE
 router.get("/:id/edit", function(req, res){
     Qna.findById(req.params.id, function(err, foundQuestion){
         res.render("edit", {question: foundQuestion});
     });
 });
 
-// UPDATE CAMPGROUND ROUTE
+// UPDATE QnA ROUTE
 router.put("/:id", function(req, res){
     // find and update the correct campground
     Qna.findByIdAndUpdate(req.params.id, req.body.qnas, function(err, updatedQuestion){
@@ -124,6 +111,19 @@ router.put("/:id", function(req, res){
        }
     });
 });
+
+// DESTROY QnA ROUTE
+router.delete("/:id", function(req, res){
+   Qna.findByIdAndRemove(req.params.id, function(err){
+      if(err){
+          res.redirect("/");
+          console.log(err);
+      } else {
+          res.redirect("/");
+      }
+   });
+});
+
 
 
 
