@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
-const {User, Qna} = require('../models/user');
+const {User} = require('../models/user');
+const {Qna} = require('../models/qna');
 const middleware = require("../middleware/index");
 const router = express.Router();
 const app = express();
@@ -36,7 +37,7 @@ router.post("/register", function(req, res){
 		}
 		passport.authenticate("local")(req, res, function(){
       req.flash("success", "Welcome to Web Dev Interview Q&A's " + user.username);
-			res.redirect("/home");
+			res.redirect("/");
 		});
 	});
 });

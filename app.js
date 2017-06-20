@@ -13,7 +13,8 @@ const middleware = require("./middleware/index");
 
 
 const {DATABASE_URL, TEST_DATABASE_URL, PORT} = require('./config');
-const {User, Qna} = require('./models/user');
+const {User} = require('./models/user');
+const {Qna} = require('./models/qna');
 const {routes, app} = require('./routes/index');
 
 mongoose.Promise = global.Promise;
