@@ -9,7 +9,7 @@ const session = require('express-session');
 const ejs = require('ejs');
 const flash = require('connect-flash');
 const methodOverride = require("method-override");
-const middleware = require("../middleware/index");
+const middleware = require("./middleware/index");
 
 
 const {DATABASE_URL, TEST_DATABASE_URL, PORT} = require('./config');
