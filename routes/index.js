@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const {User, Qna} = require('../models/user');
-const middleware = require("../middleware");
+const middleware = require("../middleware/index");
 const router = express.Router();
 const app = express();
 
@@ -9,7 +9,6 @@ const app = express();
 router.get('/', (req, res) => {
   // Get all campgrounds from DB
   Qna.find({}, function(err, allQnas){
-    console.log(Qna)
     if(err){
       console.log(err);
     } else {
@@ -61,7 +60,7 @@ router.get("/logout", function(req, res){
 });
 
 //ADD QnA ROUTES
-router.get('/new', (req, res) => {
+router.get('/new', middleware.isLoggedIn, (req, res) => {
 	Qna.find({}, function(err, allQnas){
     console.log(Qna)
 		if(err){
@@ -72,7 +71,7 @@ router.get('/new', (req, res) => {
 	});
 });
 
-router.post('/new', (req, res) => {
+router.post('/new', middleware.isLoggedIn, (req, res) => {
 	var question = req.body.question;
   var answer = req.body.answer;
 	var source = req.body.source;
@@ -93,28 +92,27 @@ router.post('/new', (req, res) => {
 });
 
 // EDIT QnA ROUTE
-router.get("/:id/edit", function(req, res){
+router.get("/:id/edit", middleware.checkQuestionOwnership, function(req, res){
     Qna.findById(req.params.id, function(err, foundQuestion){
         res.render("edit", {question: foundQuestion});
     });
 });
 
 // UPDATE QnA ROUTE
-router.put("/:id", function(req, res){
-    // find and update the correct campground
+router.put("/:id", middleware.checkQuestionOwnership, function(req, res){
+    // find and update the correct question
     Qna.findByIdAndUpdate(req.params.id, req.body.qnas, function(err, updatedQuestion){
        if(err){
            res.redirect("/");
            console.log(err);
        } else {
-           //redirect somewhere(show page)
            res.redirect("/");
        }
     });
 });
 
 // DESTROY QnA ROUTE
-router.delete("/:id", function(req, res){
+router.delete("/:id", middleware.checkQuestionOwnership, function(req, res){
    Qna.findByIdAndRemove(req.params.id, function(err){
       if(err){
           res.redirect("/");
