@@ -1,13 +1,13 @@
 const express = require('express');
 const passport = require('passport');
 const {User, Qna} = require('../models/user');
-
-// const Entry = require('../models/entry');
-
+const middleware = require("../middleware");
 const router = express.Router();
 const app = express();
 
+//INDEX - show all campgrounds
 router.get('/', (req, res) => {
+  // Get all campgrounds from DB
   Qna.find({}, function(err, allQnas){
     console.log(Qna)
     if(err){
@@ -60,14 +60,6 @@ router.get("/logout", function(req, res){
     res.redirect("/");
 });
 
-// prevents access to /qnas
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
-
 //ADD QnA ROUTES
 router.get('/new', (req, res) => {
 	Qna.find({}, function(err, allQnas){
@@ -80,7 +72,7 @@ router.get('/new', (req, res) => {
 	});
 });
 
-router.post('/new', isLoggedIn, (req, res) => {
+router.post('/new', middleware.isLoggedIn, (req, res) => {
 	var question = req.body.question;
 	var answer = req.body.answer;
 	var author = {
@@ -99,6 +91,42 @@ router.post('/new', isLoggedIn, (req, res) => {
     });
 });
 
+// EDIT CAMPGROUND ROUTE
+// router.get("/:id", function(req, res){
+//     //find the campground with provided ID
+//     Qna.findById(req.params.id).exec(function(err, foundQuestion){
+//         if(err){
+//             console.log(err);
+//         } else {
+//             console.log(foundQuestion)
+//             //render show template with that campground
+//             res.render("edit", {qnas: foundQuestion});
+//         }
+//     });
+// });
+
+router.get("/:id/edit", function(req, res){
+    Qna.findById(req.params.id, function(err, foundQuestion){
+        res.render("edit", {question: foundQuestion});
+    });
+});
+
+// UPDATE CAMPGROUND ROUTE
+router.put("/:id", function(req, res){
+    // find and update the correct campground
+    Qna.findByIdAndUpdate(req.params.id, req.body.qnas, function(err, updatedQuestion){
+       if(err){
+           res.redirect("/");
+           console.log(err);
+       } else {
+           //redirect somewhere(show page)
+           res.redirect("/");
+       }
+    });
+});
+
+
+
 
 
 // // catch-all endpoint if client makes request to non-existent endpoint
@@ -106,7 +134,7 @@ router.post('/new', isLoggedIn, (req, res) => {
 //   res.status(404).json({message: 'Not Found'});
 // });
 
-///module.exports = router;
+
 var routes = router;
 module.exports = {routes, app};
 

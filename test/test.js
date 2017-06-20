@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const should = chai.should();
 
-const {User} = require('../models/user');
+const {User, Qna} = require('../models/user');
 const {app, runServer, closeServer} = require('../app');
 const {TEST_DATABASE_URL} = require('../config');
 

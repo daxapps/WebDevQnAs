@@ -7,6 +7,8 @@ const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require('express-session');
 const ejs = require('ejs');
+const flash = require('connect-flash');
+const methodOverride = require("method-override");
 
 const {DATABASE_URL, TEST_DATABASE_URL, PORT} = require('./config');
 const {User, Qna} = require('./models/user');
@@ -21,6 +23,8 @@ app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use(methodOverride("_method"));
+app.use(flash());
 
 app.use(session({
     secret: "asdgasgsafhsdhh",
@@ -35,6 +39,13 @@ app.use('/', routes);
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   res.locals.error = req.flash("error");
+   res.locals.success = req.flash("success");
+   next();
+});
 
 let server;
 
