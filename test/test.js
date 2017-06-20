@@ -1,6 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
+const middleware = require("../middleware/index");
 
 const should = chai.should();
 
