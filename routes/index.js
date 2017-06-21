@@ -18,9 +18,7 @@ router.get('/', (req, res) => {
   });
 });
 
-
-
-// Auth Routes
+// AUTH ROUTES
 //show sign up form
 router.get("/register", function(req, res){
 	console.log('Register')
