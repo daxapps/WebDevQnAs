@@ -5,8 +5,8 @@ const faker = require('faker');
 
 const should = chai.should();
 
-const {User} = require('./models/user');
-const {Qna} = require('./models/qna');
+const {User} = require('../models/user');
+const {Qna} = require('../models/qna');
 const {app, runServer, closeServer} = require('../app');
 const {TEST_DATABASE_URL} = require('../config');
 const middleware = require("../middleware/index");
@@ -100,13 +100,13 @@ describe('Tests', function() {
 		it('should return QnAs with right fields', function() {
 			let resQnas;
 			return api
-			.get('/')
+			.get('/home')
 			.then(function(res) {
 				res.should.have.status(200);
 				// res.should.be.json;
 				// res.body.should.be.a('array');
 				// res.body.should.have.length.of.at.least(1);
-
+				console.log("RESBODY: ", res.body)
 				res.body.forEach(function(question) {
 					post.should.be.a('object');
 					post.should.include.keys(
