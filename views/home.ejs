@@ -1,0 +1,31 @@
+<% include partials/header %> 
+    <header class="jumbotron">
+         <div class="container">
+             <h1>Web Dev Interview Questions</h1>
+             <p></p>
+             <p>
+                <a class="btn btn-primary btn-large" href="/new">Add New Question</a>
+             </p>
+         </div>
+     </header>
+    <div class="container">
+  
+      <div class="text-center" style="">
+        <% qnas.forEach(function(qna){ %>
+          <div>
+            
+              <h2><%= qna.question %></h2>
+              <p><%= qna.answer %></p>
+              <p><em>Source: <%= qna.source %></em></p>
+              <p><em>Submitted By: <%= qna.author.username %></em></p>
+              <p><a class="btn btn-xs btn-warning" href="/<%= qna.id %>/edit">Edit</a></p>
+              
+              <form id="delete-form" action="/<%= qna.id %>?_method=DELETE" method="POST">
+                <button class="btn btn-xs btn-danger">Delete</button></p>
+              </form>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+<% include partials/footer %>
+ 
