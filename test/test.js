@@ -98,30 +98,17 @@ describe('Tests', function() {
 			});
 
 		it('should return QnAs with right fields', function() {
-			let resQnas;
-			return api
-			.get('/home')
-			.then(function(res) {
-				res.should.have.status(200);
-				// res.should.be.json;
-				// res.body.should.be.a('array');
-				// res.body.should.have.length.of.at.least(1);
-				console.log("RESBODY: ", res.body)
-				res.body.forEach(function(question) {
-					post.should.be.a('object');
-					post.should.include.keys(
+			Qna.find({}, function(err, questions){
+				questions.should.have.length.of.at.least(1);
+				questions.forEach(function(question) {
+					question.should.be.a('object');
+					question.should.include.keys(
 						'id', 'question', 'author', 'answer', 'source');
 				});
-				resQnas = res.body[0];
-				return Qna.findById(qnas.id);
+				resQnas = questions[0];
+
 			})
-			.then(function(question) {
-				resQnas.id.should.equal(question.id);
-				resQnas.question.should.equal(question.question);
-				resQnas.author.should.equal(question.author.username);
-				resQnas.answer.should.equal(question.answer);
-				resQnas.source.should.equal(question.source);
-			});
+			
 		});
 	});
 });
