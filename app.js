@@ -9,9 +9,9 @@ const session = require('express-session');
 const ejs = require('ejs');
 const flash = require('connect-flash');
 const methodOverride = require("method-override");
+const flashcard = require('flashcard');
+
 const middleware = require("./middleware/index");
-
-
 const {DATABASE_URL, TEST_DATABASE_URL, PORT} = require('./config');
 const {User} = require('./models/user');
 const {Qna} = require('./models/qna');
