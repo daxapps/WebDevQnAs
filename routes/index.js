@@ -56,7 +56,7 @@ router.post("/login", passport.authenticate("local", {
 router.get("/logout", function(req, res){
     req.logout();
    	req.flash("success", "Logged you out!");
-    res.render("/");
+    res.redirect("/");
 });
 
 //ADD QnA ROUTES
