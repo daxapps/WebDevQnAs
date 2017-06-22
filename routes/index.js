@@ -8,7 +8,7 @@ const app = express();
 
 //INDEX - show all campgrounds
 router.get('/', (req, res) => {
-  // Get all campgrounds from DB
+  // Get all questions from DB
   Qna.find({}, function(err, allQnas){
     if(err){
       console.log(err);
@@ -57,6 +57,18 @@ router.get("/logout", function(req, res){
     req.logout();
    	req.flash("success", "Logged you out!");
     res.redirect("/");
+});
+
+// FLASHCARDS ROUTES
+router.get('/flashcards', (req, res) => {
+  // Get all questions from DB
+  Qna.find({}, function(err, allQnas){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("flashcards",{qnas:allQnas, page: 'flashcards'});
+    }
+  });
 });
 
 //ADD QnA ROUTES

@@ -12,3 +12,42 @@ body {
 .show-answers-btn {
 	display: none;
 }
+
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.cardControl {
+		width: 400px;
+		height: 60px;
+		text-align: center;
+		margin: 28px auto;
+}
+
+.flashcardSection {
+		height: 150px;
+}
+
+.flashcardEvent {
+		border-radius: 4px;
+		width: 500px;
+		height: 150px;
+		padding: 2%;
+		text-align: center;
+		margin: 28px auto;
+		border: 1px solid #B8C0C5;
+		color: #222;
+		display: none;
+}
+
+.flashcardEvent:first-child {
+		display: block;
+}
+
+.flashcardEvent .back {
+		display: none;
+}
