@@ -18,27 +18,27 @@ const {Qna} = require('./models/qna');
 const {routes, app} = require('./routes/index');
 
 mongoose.Promise = global.Promise;
-
+app.use(bodyParser.urlencoded({extended: true}));
 app.set('views', 'views');
 app.set('view engine', 'ejs');
-// log the http layer
-app.use(morgan('common'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(methodOverride("_method"));
+app.use(flash());
+app.locals.moment = require("moment");
 
 app.use(session({
     secret: "asdgasgsafhsdhh",
     resave: false,
     saveUninitialized: false
 }));
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/', routes);
-// app.use(express.static('public'));
+// log the http layer
+app.use(morgan('common'));
+app.use(bodyParser.json());
 
+app.use(passport.initialize());
+app.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -49,6 +49,9 @@ app.use(function(req, res, next){
    res.locals.success = req.flash("success");
    next();
 });
+
+app.use('/', routes);
+
 
 let server;
 

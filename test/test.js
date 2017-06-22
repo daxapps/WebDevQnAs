@@ -34,7 +34,6 @@ function generateQnaData() {
 		answer: faker.lorem.paragraph(),
 		source: faker.internet.domainName(),
 		author: {
-			// id: faker.random.number(),
 			username: faker.internet.userName()
 		}
 	}
@@ -89,15 +88,11 @@ describe('Tests', function() {
 			.then(function(_res) {
 				res = _res;
 				res.should.have.status(200);
-				// res.body.should.have.length.of.at.least(1);
 				return Qna.count();
 			})
-				// .then(count => {
-				// 	res.body.should.have.length.of(count);
-				// })
-			});
+		});
 
-		it('should return QnAs with right fields', function() {
+		it('should return QnAs with correct fields', function() {
 			Qna.find({}, function(err, questions){
 				questions.should.have.length.of.at.least(1);
 				questions.forEach(function(question) {
@@ -106,11 +101,74 @@ describe('Tests', function() {
 						'id', 'question', 'author', 'answer', 'source');
 				});
 				resQnas = questions[0];
-
 			})
-			
 		});
 	});
+
+	// describe('POST endpoint', function() {
+	// 	it('should add a new question', function() {
+	// 		const newQuestion = generateQnaData();
+
+	// 		return api
+	// 			.post('/posts')
+	// 			.send(newQuestion)
+	// 			.then(function(_res) {
+	// 				res = _res;
+	// 				res.should.have.status(201);
+	// 				res.should.be.json;
+	// 				res.body.should.be.a('object');
+	// 				question.should.include.keys(
+	// 					'id', 'question', 'author', 'answer', 'source');
+	// 				res.body.id.should.not.be.null;
+	// 				res.body.question.should.equal(newQuestion.question);
+	// 				res.body.author.should.equal(newQuestion.author);
+	// 				res.body.answer.should.equal(newQuestion.answer);
+	// 				return Qna.findById(res.body.id);
+	// 			})
+	// 			.then(function(question) {
+	// 				question.question.should.equal(newQuestion.question);
+	// 				question.author.should.equal(newQuestion.author);
+	// 				question.answer.should.equal(newQuestion.answer);
+	// 			});
+	// 	});
+	// });
+
+
+
+	// describe('testing create new QnA', () => {
+	// 	it('should create new QnA', () => {
+	// 		return authUser
+	// 			.post('/login')
+	// 			.send({username: 'dax2000', password: 'test'})
+	// 			.expect(302)
+	// 			.then(res => {
+	// 				return authUser
+	// 					.post('/new')
+	// 					.send({
+	// 						question: faker.lorem.sentence(),
+	// 						answer: faker.lorem.paragraph(),
+	// 						source: faker.internet.domainName()
+	// 					})
+	// 					.expect(302)
+	// 			})
+	// 			.then(res => {
+	// 				// console.log('qna: ', qna)
+	// 				return {Qna}
+	// 					.findOne({username: 'dax2000'})
+	// 					.exec()
+	// 					.then(qnas => {
+	// 						describe('QnA exist', () => {
+	// 							it('QnA should have user', () => {
+	// 								// console.log('QNA Author: ', qna.author.username)
+	// 								qnas.author.should.not.have.length(0)
+	// 							})
+	// 						})
+	// 					 })
+	// 			})
+				
+	// 	})
+	// })
+
 });
 
 

@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 //show sign up form
 router.get("/register", function(req, res){
 	console.log('Register')
-   res.render("register"); 
+   res.render("register", {page: "register"}); 
 });
 
 //handling user sign up
@@ -43,7 +43,8 @@ router.post("/register", function(req, res){
 // LOGIN ROUTES
 //render login form
 router.get("/login", function(req, res){
-   res.render("login"); 
+  req.flash("success", "You are logged in.");
+  res.render("login"); 
 });
 //login logic middleware
 router.post("/login", passport.authenticate("local", {
@@ -55,7 +56,7 @@ router.post("/login", passport.authenticate("local", {
 router.get("/logout", function(req, res){
     req.logout();
    	req.flash("success", "Logged you out!");
-    res.redirect("/");
+    res.render("/");
 });
 
 //ADD QnA ROUTES
