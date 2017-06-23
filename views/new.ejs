@@ -5,35 +5,33 @@
      <h3>Add Question and Answer</h3>
      <div class="form-group">
        <label>Question</label>
-       <input type="text" name="question" class="form-control">
+       <input type="text" name="question" class="form-control" required autofocus>
      </div>
      <div class="form-group">
        <label>Answer</label>
-       <input type="text" name="answer" class="form-control">
+       <input type="text" name="answer" class="form-control" required autofocus>
      </div>
      <div class="form-group">
        <label>Source</label>
-       <input type="text" name="source" class="form-control">
+       <input type="text" name="source" class="form-control" required autofocus>
      </div>
      <div class="form-group">
        <button class="btn btn-success">Submit</button>
      </div>
    </form>
-   <a href="/">Go Back</a>
-   <!-- <a class="btn btn-primary" href="/register">Register</a> -->
-   <div class="container">
-
-      <div class="text-center" style="">
+   </br>
+   <div class="text-center" style="">
         <% qnas.forEach(function(qna){ %>
-          <div>
-            <h2><%= qna.question %></h2>
+          <div class="card">
+            
+              <h2><%= qna.question %></h2>
               <p><%= qna.answer %></p>
-              <p><%= qna.author.username %></p>
-              <button>Edit</button>
+              <p><em>Source: <%= qna.source %></em></p>
+              <p><em>Submitted By: <%= qna.author.username %></em></p>             
           </div>
+          </br>
         <% }); %>
-      </div>
-    </div>
+      </div> 
 
   </div>
 <% include partials/footer %>

@@ -1,29 +1,32 @@
 <% include partials/header %> 
     <header class="jumbotron">
-         <div class="container">
-             <h1>Web Dev Interview Questions</h1>
-             <p></p>
-             <p>
-                <a class="btn btn-primary btn-large" href="/new">Add New Question</a>
-             </p>
+         <div class="container text-center">
+             <h1>Web Dev Interview Questions</h1>      
          </div>
      </header>
-    <div class="container">
-      <button class="hide-answers-btn btn btn-primary">Hide Answers</button>
-      <button class="show-answers-btn btn btn-primary">Show Answers</button>
+    <div class="container text-center">
+      <p>
+        <a id="hide-answers-btn" class="btn btn-primary btn-large">Hide Answers</a>
+        <a id="show-answers-btn" class="btn btn-primary btn-large">Show Answers</a>
+        <a class="btn btn-primary btn-large" href="/new">Add New Question</a>
+      </p>
+      </br>
       <div class="text-center" style="">
         <% qnas.forEach(function(qna){ %>
           <div class="card">
             
               <h2><%= qna.question %></h2>
-              <p class="answer"><%= qna.answer %></p>
+              <p class="hide-answer"><%= qna.answer %></p>
               <p><em>Source: <%= qna.source %></em></p>
               <p><em>Submitted By: <%= qna.author.username %></em></p>
-              <p><a class="btn btn-xs btn-warning" href="/<%= qna.id %>/edit">Edit</a></p>
               
               <form id="delete-form" action="/<%= qna.id %>?_method=DELETE" method="POST">
-                <button class="btn btn-xs btn-danger">Delete</button></p>
+                <button class="card-btn btn btn-xs btn-danger">Delete</button></p>
               </form>
+              <p><a class="card-btn btn btn-xs btn-warning" href="/<%= qna.id %>/edit">Edit</a></p>
+              
+              
+              
           </div>
           </br>
         <% }); %>

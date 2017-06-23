@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 body {
   min-height: 75rem;
   padding-top: 6.5rem;
@@ -5,11 +9,34 @@ body {
   /*background: red;*/
 }
 
-.card {
-	border: 2px solid black;
+/*.btn-large {
+	width: 144px;
+	height: 35px;
+}*/
+
+h2 {
+	margin: 0;
 }
 
-.show-answers-btn {
+.card {
+	border: 2px solid black;
+	max-width: 60%;
+	margin: 10px auto;
+	padding: 10px;
+}
+
+.hide-answer {
+	display: none;
+	max-width: 75%;
+	margin: 10px auto 20px;
+}
+
+.card-btn {
+	float: right;
+	margin: -30px 10px 40px;
+}
+
+#hide-answers-btn {
 	display: none;
 }
 
@@ -23,22 +50,22 @@ body {
 
 .cardControl {
 		width: 400px;
-		height: 60px;
+		/*height: 60px;*/
 		text-align: center;
-		margin: 28px auto;
+		margin: 5px auto;
 }
 
 .flashcardSection {
-		height: 150px;
+		height: 250px;
 }
 
 .flashcardEvent {
 		border-radius: 4px;
-		width: 500px;
-		height: 150px;
-		padding: 2%;
+		width: 60%;
+		height: 250px;
+		padding: 3%;
 		text-align: center;
-		margin: 28px auto;
+		margin: auto;
 		border: 1px solid #B8C0C5;
 		color: #222;
 		display: none;

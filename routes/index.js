@@ -96,6 +96,8 @@ router.post('/new', middleware.isLoggedIn, (req, res) => {
         if(err){
             console.log(err);
         } else {
+        req.flash("success", "Your new question was created.");
+
             //redirect back to home page
             console.log(newlyCreated);
             res.redirect("/");
@@ -118,6 +120,8 @@ router.put("/:id", middleware.checkQuestionOwnership, function(req, res){
            res.redirect("/");
            console.log(err);
        } else {
+        req.flash("success", "Your question was edited.");
+
            res.redirect("/");
        }
     });
@@ -130,6 +134,7 @@ router.delete("/:id", middleware.checkQuestionOwnership, function(req, res){
           res.redirect("/");
           console.log(err);
       } else {
+        req.flash("success", "Your question was deleted.");
           res.redirect("/");
       }
    });
