@@ -50,11 +50,8 @@ describe('Tests', function() {
 
 	before(function() {
   		console.log("test DB: " + TEST_DATABASE_URL)
+		seedQnaData();
 		return runServer(TEST_DATABASE_URL); 
-	});
-
-	beforeEach(function() {
-		return seedQnaData();
 	});
 
 	after(function() {

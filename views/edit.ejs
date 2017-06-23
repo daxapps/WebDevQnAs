@@ -2,8 +2,8 @@
 
 
 <div class="container">
-  <h1 style="text-align: center">Edit <%= question.question %></h1>
-    <form action="/<%= question.id %>?_method=PUT" method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+  <h1 style="text-align: center">Edit: <%= question.question %></h1>
+    <form action="/<%= question.id %>?_method=PUT" method="POST" style="max-width: 40%; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
      
      <div class="form-group">
        <label>Question</label>
@@ -11,7 +11,9 @@
      </div>
      <div class="form-group">
        <label>Answer</label>
-       <input type="text" name="qnas[answer]" class="form-control" value="<%= question.answer %>">
+       
+       <textarea name="qnas[answer]" class="form-control" ><%= question.answer %></textarea>
+
      </div>
      <div class="form-group">
        <label>Source</label>

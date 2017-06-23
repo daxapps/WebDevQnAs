@@ -9,6 +9,10 @@ body {
   /*background: red;*/
 }
 
+.jumbotron {
+	background-color: #9fb6ca !important;
+}
+
 /*.btn-large {
 	width: 144px;
 	height: 35px;
@@ -19,10 +23,16 @@ h2 {
 }
 
 .card {
-	border: 2px solid black;
+	border: 0.5px solid gray;
 	max-width: 60%;
 	margin: 10px auto;
 	padding: 10px;
+}
+
+.question {
+	display: inline-block;
+	margin-bottom: 15px;
+
 }
 
 .hide-answer {
@@ -40,6 +50,9 @@ h2 {
 	display: none;
 }
 
+/*#textbox-input {
+	height: 10em;
+}*/
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
