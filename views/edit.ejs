@@ -2,26 +2,23 @@
 
 <div class="container">
   <h1 style="text-align: center">Edit: <%= question.question %></h1>
-    <form action="/<%= question.id %>?_method=PUT" method="POST" style="max-width: 40%; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
-     
-     <div class="form-group">
-       <label>Question</label>
-       <input type="text" name="qnas[question]" class="form-control" value="<%= question.question %>">
-     </div>
-     <div class="form-group">
-       <label>Answer</label>
-       
-       <textarea name="qnas[answer]" class="form-control" ><%= question.answer %></textarea>
-
-     </div>
-     <div class="form-group">
-       <label>Source</label>
-       <input type="text" name="qnas[source]" class="form-control" value="<%= question.source %>">
-     </div>
-     <div class="form-group">
-       <button class="btn btn-success">Submit</button>
-     </div>
-   </form>  
+  <form action="/<%= question.id %>?_method=PUT" method="POST" style="margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+   <div class="form-group">
+     <label>Question</label>
+     <input type="text" name="qnas[question]" class="form-control" value="<%= question.question %>">
+   </div>
+   <div class="form-group">
+     <label>Answer</label>
+     <textarea name="qnas[answer]" class="form-control" ><%= question.answer %></textarea>
+   </div>
+   <div class="form-group">
+     <label>Source</label>
+     <input type="text" name="qnas[source]" class="form-control" value="<%= question.source %>">
+   </div>
+   <div class="form-group">
+     <button class="btn btn-success">Submit</button>
+   </div>
+  </form>  
 </div>
 
 <% include partials/footer %>

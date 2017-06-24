@@ -27,7 +27,6 @@ function seedQnaData() {
 	return Qna.insertMany(seedData);
 }
 
-
 function generateQnaData() {
 	return {
 		question: faker.lorem.sentence(),

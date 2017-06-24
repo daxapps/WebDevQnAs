@@ -43,11 +43,11 @@ router.post("/register", function(req, res){
 // LOGIN ROUTES
 //render login form
 router.get("/login", function(req, res){
-  req.flash("success", "You are logged in.");
   res.render("login"); 
 });
 //login logic middleware
 router.post("/login", passport.authenticate("local", {
+  
 	successRedirect: "/",
 	failureRedirect: "/login"
 }) ,function(req, res){
@@ -64,6 +64,7 @@ router.get('/flashcards', (req, res) => {
   // Get all questions from DB
   Qna.find({}, function(err, allQnas){
     if(err){
+      req.flash("error", "Something went wrong, try again");
       console.log(err);
     } else {
       res.render("flashcards",{qnas:allQnas, page: 'flashcards'});
@@ -76,6 +77,7 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 	Qna.find({}, function(err, allQnas){
     console.log(Qna)
 		if(err){
+      req.flash("error", "Something went wrong, try again");
       console.log(err);
     } else {
       res.render("new",{qnas:allQnas, page: 'new'});
@@ -107,39 +109,38 @@ router.post('/new', middleware.isLoggedIn, (req, res) => {
 
 // EDIT QnA ROUTE
 router.get("/:id/edit", middleware.checkQuestionOwnership, function(req, res){
-    Qna.findById(req.params.id, function(err, foundQuestion){
-        res.render("edit", {question: foundQuestion});
-    });
+  Qna.findById(req.params.id, function(err, foundQuestion){
+    res.render("edit", {question: foundQuestion});
+  });
 });
 
 // UPDATE QnA ROUTE
 router.put("/:id", middleware.checkQuestionOwnership, function(req, res){
-    // find and update the correct question
-    Qna.findByIdAndUpdate(req.params.id, req.body.qnas, function(err, updatedQuestion){
-       if(err){
-           res.redirect("/");
-           console.log(err);
-       } else {
-        req.flash("success", "Your question was edited.");
+  // find and update the correct question
+  Qna.findByIdAndUpdate(req.params.id, req.body.qnas, function(err, updatedQuestion){
+   if(err){
+       res.redirect("/");
+       console.log(err);
+   } else {
+    req.flash("success", "Your question was edited.");
 
-           res.redirect("/");
-       }
-    });
+       res.redirect("/");
+   }
+  });
 });
 
 // DESTROY QnA ROUTE
 router.delete("/:id", middleware.checkQuestionOwnership, function(req, res){
    Qna.findByIdAndRemove(req.params.id, function(err){
-      if(err){
-          res.redirect("/");
-          console.log(err);
-      } else {
-        req.flash("success", "Your question was deleted.");
-          res.redirect("/");
-      }
+    if(err){
+        res.redirect("/");
+        console.log(err);
+    } else {
+      req.flash("success", "Your question was deleted.");
+        res.redirect("/");
+    }
    });
 });
-
 
 var routes = router;
 module.exports = {routes, app};

@@ -1,34 +1,34 @@
 <% include partials/header %>
+
 <header class="jumbotron">
-     <div class="container text-center">
-         <h1>Web Dev Interview Questions</h1>      
-     </div>
- </header>
+ <div class="container text-center">
+  <h1>Web Dev Interview Questions</h1>      
+ </div>
+</header>
 <div class="container text-center">
   <p>
     <a class="btn btn-primary btn-large" href="/new">Add New Question</a>
   </p>
-</br>
-<div class="cardControl">
-	<div class="btn btn-success" id="prevCard">Prev</div>
-	<div class="btn btn-warning" id="flipCard" data-side="front">Flip</div>
-	<div class="btn btn-success" id="nextCard">Next</div>
-</div>
-<div class="flashcardSection">
-	<% qnas.forEach(function(qna){ %>
-		<div class="flashcardEvent">
-			<div class="front">
-				<h2><%= qna.question %></h2>
+	</br>
+	<div class="cardControl">
+		<div class="btn btn-success" id="prevCard">Prev</div>
+		<div class="btn btn-warning" id="flipCard" data-side="front">Flip</div>
+		<div class="btn btn-success" id="nextCard">Next</div>
+	</div>
+	<div class="flashcardSection">
+		<% qnas.forEach(function(qna){ %>
+			<div class="flashcardEvent">
+				<div class="front">
+					<h2><%= qna.question %></h2>
+				</div>
+				<div class="back">
+					<p class="answer"><%= qna.answer %></p>
+	        <p><em>Source: <%= qna.source %></em></p>
+	        <p><em>Submitted By: <%= qna.author.username %></em></p>
+				</div>
 			</div>
-			<div class="back">
-				<p class="answer"><%= qna.answer %></p>
-        <p><em>Source: <%= qna.source %></em></p>
-        <p><em>Submitted By: <%= qna.author.username %></em></p>
-			</div>
-		</div>
-	<% }); %>
+		<% }); %>
+	</div>
 </div>
-</div>
-
 
 <% include partials/footer %>

@@ -8,7 +8,6 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
 <body>
-
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -21,14 +20,13 @@
         </button>
         <a class="navbar-brand" href="#"></a>
       </div>
-
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
           <li><a href="/">Home</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="flashcards">Flashcards</a></li>  
+          <li><a href="flashcards">Flashcards</a></li>  
           <% if(!currentUser){ %>
             <li><a href="login">Login</a></li>
             <li><a href="register">Signup</a></li>
@@ -41,18 +39,17 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div class="container">
-        
+  <div class="container">    
     <% if(error && error.length > 0){ %>
-            <div class="alert alert-danger" role="alert">
-                <%= error %>
-            </div>
+      <div class="alert alert-danger" role="alert">
+          <%= error %>
+      </div>
     <% } %>
     <% if(success && success.length > 0){ %>
-            <div class="alert alert-success" role="alert">
-                <%= success %>
-            </div>
+      <div class="alert alert-success" role="alert">
+          <%= success %>
+      </div>
     <% } %>
-    </div>
+  </div>
 
   <div class="container content">
