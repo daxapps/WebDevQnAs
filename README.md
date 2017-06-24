@@ -6,7 +6,7 @@ The app will help web developers study interview questions with flashcards.
 ## Screenshots
 ![Home](https://i.imgur.com/aZGRSu3.png)
 ![Home with answers](https://i.imgur.com/qGDyMJd.png)
-![Flashcards](https://i.imgur.com/QmJFg9H.png)
+![Flashcards](https://i.imgur.com/T1EpkzI.png)
 ![Add QnA](https://i.imgur.com/4as4C5I.png)
 
 ## Technology Used
