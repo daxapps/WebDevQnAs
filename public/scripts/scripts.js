@@ -1,25 +1,15 @@
-$("#hide-answers-btn").on('click', function(event) {
-	event.preventDefault();
-	$('.hide-answer, #hide-answers-btn').hide()
-	$('#show-answers-btn').show()
-})
 
 $("#show-answers-btn").on('click', function(event) {
-	event.preventDefault();
-	$('.hide-answer, #hide-answers-btn').show()
-	$('#show-answers-btn').hide()
+	event.preventDefault();	
+	if($("#show-answers-btn").text() === "Show Answers"){
+		$('.hide-answer').show()
+		$('#show-answers-btn').text("Hide Answers")
+	} else {
+		$('.hide-answer').hide()
+		$('#show-answers-btn').text("Show Answers")
+	}
 
 })
-
-// function resetCard() {
-// 		var currentCard = null, // At First Card (1)
-// 				lastCard = null; //For timer
-// 		flip("front", "back");
-// 		$("#flipCard").attr("data-side", "front");
-// 		$(".flashcardEvent").fadeOut(200);
-// 		$(".flashcardEvent:nth-child(1)").delay(220).fadeIn(200);
-// 		playFlashcard()
-// }
 
 function flip(show, hide) {
 		$(".flashcardEvent ." + hide + "").fadeOut(200);

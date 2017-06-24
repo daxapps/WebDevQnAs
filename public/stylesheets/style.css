@@ -2,21 +2,30 @@
 	box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   min-height: 75rem;
   padding-top: 6.5rem;
   font: 14px "Open Sans", Helvetica, Arial, sans-serif;
-  /*background: red;*/
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
 }
 
 .jumbotron {
 	background-color: #9fb6ca !important;
 }
 
-/*.btn-large {
+.btn-large {
 	width: 144px;
-	height: 35px;
-}*/
+	/*height: 35px;*/
+}
 
 h2 {
 	margin: 0;
@@ -90,4 +99,18 @@ h2 {
 
 .flashcardEvent .back {
 		display: none;
+}
+
+footer {
+	color: white;
+	background-color: black;
+	height: 100px;
+	text-align: center;
+	padding-top: 20px;
+	margin-top: 20%;
+	width: 100% !important;
+}
+
+footer.p {
+	/*margin: 20px auto !important;*/
 }
