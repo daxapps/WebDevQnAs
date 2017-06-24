@@ -6,7 +6,7 @@ const middleware = require("../middleware/index");
 const router = express.Router();
 const app = express();
 
-//INDEX - show all campgrounds
+//INDEX - show all questions
 router.get('/', (req, res) => {
   // Get all questions from DB
   Qna.find({}, function(err, allQnas){
@@ -141,18 +141,5 @@ router.delete("/:id", middleware.checkQuestionOwnership, function(req, res){
 });
 
 
-
-
-
-
-// // catch-all endpoint if client makes request to non-existent endpoint
-// app.use('*', function(req, res) {
-//   res.status(404).json({message: 'Not Found'});
-// });
-
-
 var routes = router;
 module.exports = {routes, app};
-
-
-
