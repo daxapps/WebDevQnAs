@@ -1,6 +1,6 @@
 exports.DATABASE_URL = process.env.DATABASE_URL ||
                        global.DATABASE_URL || 
-                       "mongodb://dax:password@ds123722.mlab.com:23722/webdevqna"
+                       'mongodb://dax:password@ds123722.mlab.com:23722/webdevqna';
 
 
 

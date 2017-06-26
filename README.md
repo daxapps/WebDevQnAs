@@ -32,4 +32,4 @@ https://secret-crag-39294.herokuapp.com/
 
 ## License
 
-The content of this repository is licensed under a [Apache License] (http://www.apache.org/licenses/LICENSE-2.0.html)
+The content of this repository is licensed under a [Apache License](http://www.apache.org/licenses/LICENSE-2.0.html)

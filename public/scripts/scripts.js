@@ -1,12 +1,12 @@
 
-$("#show-answers-btn").on('click', function(event) {
+$("#show-answers-btn").on("click", function(event) {
 	event.preventDefault();	
 	if($("#show-answers-btn").text() === "Show Answers"){
-		$('.hide-answer').show();
-		$('#show-answers-btn').text("Hide Answers");
+		$(".hide-answer").show();
+		$("#show-answers-btn").text("Hide Answers");
 	} else {
-		$('.hide-answer').hide();
-		$('#show-answers-btn').text("Show Answers");
+		$(".hide-answer").hide();
+		$("#show-answers-btn").text("Show Answers");
 	};
 });
 
