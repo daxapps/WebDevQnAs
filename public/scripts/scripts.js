@@ -2,6 +2,7 @@
 $('#login').on('click', function(event) {
 	event.preventDefault();
 	$('.login-modal').fadeIn('slow');
+	$('.navbar-collapse').hide();
 });
 
 //keep focus on login modal
