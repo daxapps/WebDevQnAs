@@ -9,7 +9,7 @@ const {User} = require('../models/user');
 const {Qna} = require('../models/qna');
 const {app, runServer, closeServer} = require('../app');
 const {TEST_DATABASE_URL} = require('../config');
-const middleware = require('../middleware/index');
+const middleware = require("../middleware/index");
 
 chai.use(chaiHttp);
 const request = require('supertest');
@@ -48,7 +48,7 @@ describe('Tests', function() {
   	this.timeout(15000);
 
 	before(function() {
-  		console.log('test DB: ' + TEST_DATABASE_URL)
+  		console.log("test DB: " + TEST_DATABASE_URL)
 		seedQnaData();
 		return runServer(TEST_DATABASE_URL); 
 	});

@@ -25,6 +25,6 @@ QnaSchema.methods.apiRepr = function() {
 	};
 };
 
-const Qna = mongoose.model("Qna", QnaSchema);
+const Qna = mongoose.model('Qna', QnaSchema);
 
 module.exports = {Qna};
