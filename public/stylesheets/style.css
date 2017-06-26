@@ -25,6 +25,22 @@ h2 {
 	margin: 0;
 }
 
+.login-modal {
+	display: none;
+	text-align: center;
+	width: 50%;
+	position: absolute;
+	top: 30vh; 
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	z-index: 99;
+	background-color: lightgray;
+	border-radius: 5px;
+	padding: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
 .card {
 	border: 0.5px solid gray;
 	max-width: 60%;
@@ -96,6 +112,10 @@ footer {
 
 @media screen and (max-width: 760px) {
 
+	.login-modal {
+		width: 90%;
+	}
+	
 	.card {
 		max-width: 100%;
 	}

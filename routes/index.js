@@ -47,7 +47,6 @@ router.get("/login", function(req, res){
 });
 //login logic middleware
 router.post("/login", passport.authenticate("local", {
-  
 	successRedirect: "/",
 	failureRedirect: "/login"
 }) ,function(req, res){
