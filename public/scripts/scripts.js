@@ -1,21 +1,3 @@
-//Login Modal Handler
-$('#login').on('click', function(event) {
-	event.preventDefault();
-	$('.login-modal').fadeIn('slow');
-	$('.navbar-collapse').hide();
-});
-
-//keep focus on login modal
-$('#login').submit(function(event) {
-	event.preventDefault();
-	$('#username').focus();
-	$('.login-modal').fadeOut('slow');
-});
-
-// When the user clicks on <span> (x), close the modal
-$('.close')[0].onclick = function() {
-    $('#modal').hide();
-}
 
 $("#show-answers-btn").on('click', function(event) {
 	event.preventDefault();	

@@ -43,7 +43,7 @@ router.post("/register", function(req, res){
 // LOGIN ROUTES
 //render login form
 router.get("/login", function(req, res){
-  res.render("home"); 
+  res.render("login"); 
 });
 //login logic middleware
 router.post("/login", passport.authenticate("local", {
