@@ -6,11 +6,16 @@ $('#login').on('click', function(event) {
 });
 
 //keep focus on login modal
-$('#login button').submit(function(event) {
+$('#login').submit(function(event) {
 	event.preventDefault();
-	$('#user').focus();
+	$('#username').focus();
 	$('.login-modal').fadeOut('slow');
 });
+
+// When the user clicks on <span> (x), close the modal
+$('.close')[0].onclick = function() {
+    $('#modal').hide();
+}
 
 $("#show-answers-btn").on('click', function(event) {
 	event.preventDefault();	
