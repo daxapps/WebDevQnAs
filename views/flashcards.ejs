@@ -1,10 +1,11 @@
 <% include partials/header %>
 
-<header class="jumbotron">
- <div class="container text-center">
-  <h1>Web Dev Interview Questions</h1>      
- </div>
-</header>
+<header class="header-container">
+   <div class="container text-center">
+     <h1>Web Dev Interview Questions</h1> 
+     <p>Practice Interveiw Questions with flashcards. SignIn to create your own.</p>     
+   </div>
+ </header>
 <div class="container text-center">
   <p>
     <a class="btn btn-primary btn-large" href="/new">Add New Question</a>
@@ -17,7 +18,7 @@
 	</div>
 	<div class="flashcardSection">
 		<% qnas.forEach(function(qna){ %>
-			<div class="flashcardEvent">
+			<div class="card flashcardEvent">
 				<div class="front">
 					<h2><%= qna.question %></h2>
 				</div>
