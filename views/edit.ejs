@@ -1,8 +1,8 @@
 <% include partials/header %>
 
 <div class="container">
-  <h1 style="text-align: center">Edit: <%= question.question %></h1>
-  <form action="/<%= question.id %>?_method=PUT" method="POST" style="margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+  <h2 class="edit-title">Edit: <%= question.question %></h1>
+  <form action="/<%= question.id %>?_method=PUT" method="POST" class="forms new-question-form">
    <div class="form-group">
      <label>Question</label>
      <input type="text" name="qnas[question]" class="form-control" value="<%= question.question %>">

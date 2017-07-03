@@ -13,8 +13,15 @@ body {
   background-color: lightgray;
 }
 
+.alert {
+	margin: 75px auto 20px;
+	max-width: 35%;
+	text-align: center;
+}
+
 .navbar {
 	background-color: black;
+	border-bottom: 0;
 }
 
 .navbar-nav>li>a:hover {
@@ -29,23 +36,26 @@ body {
 }
 
 h1 {
-	margin-top: 350px;
+	margin-top: 300px;
 	font-size: 4em;
 }
 
 .btn {
 	background-color: #0DDFFF;
 	color: black;
+	border-color: darkgray;
+}
+
+.btn:hover {
+	background-color: blue;
+	border-color: darkgray;
+
 }
 
 .btn-large {
 	width: 144px;
 	margin-top: 30px;
 }
-
-/*.main {
-	background-color: lightgray;
-}*/
 
 h2 {
 	margin: 0;
@@ -60,7 +70,7 @@ h2 {
 }
 
 .card-btn {
-	width: 50px;
+	width: 75px;
 }
 
 .question {
@@ -86,42 +96,64 @@ h2 {
           border-radius: $radius;
 }
 
-form {
+.forms {
 	color: white;
 	background-color: #4F5052;
-
+	max-width: 300px; 
+	margin: 100px auto 250px; 
+	border: 0.5px solid gray; 
+	border-radius: 3px;
+	padding: 30px 30px 30px 30px;
+}
+.new-question-form {
+	max-width: 80%;
 }
 
 #card-form {
 	background-color: white;
 }
+
 .cardControl {
-		width: 100%;
-		text-align: center;
-		margin: 5px auto;
+	width: 100%;
+	text-align: center;
+	margin: 5px auto;
+}
+
+.cardControl>.btn {
+	width: 75px;
+}
+
+.flashcard-container {
+	margin-top: 100px;
+	margin-bottom: 200px;
 }
 
 .flashcardSection {
-		height: 250px;
+	height: 250px;
 }
 
 .flashcardEvent {
-		border-radius: 4px;
-		width: 60%;
-		padding: 3%;
-		text-align: center;
-		margin: auto;
-		border: 1px solid #B8C0C5;
-		color: #222;
-		display: none;
+	border-radius: 4px;
+	width: 60%;
+	padding: 3%;
+	text-align: center;
+	margin: 10px auto;
+	border: 1px solid #B8C0C5;
+	color: #222;
+	display: none;
 }
 
 .flashcardEvent:first-child {
-		display: block;
+	display: block;
 }
 
 .flashcardEvent .back {
-		display: none;
+	display: none;
+}
+
+.edit-title {
+	text-align: center;
+	margin-top: 100px;
 }
 
 footer {
@@ -142,7 +174,14 @@ footer {
 
 	.flashcardEvent {
 		width: 100% !important;
-		
+	}
+
+	.alert {
+		max-width: 90%;
+	}
+
+	.card>p>a {
+		margin-top: 10px;
 	}
 }
 
