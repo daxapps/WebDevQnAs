@@ -35,6 +35,10 @@ body {
 	color: #0DDFFF;
 }
 
+.header-container a {
+	color: #0DDFFF;
+}
+
 h1 {
 	margin-top: 300px;
 	font-size: 4em;
