@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha",
-    "start": "node ./bin/www.js"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",

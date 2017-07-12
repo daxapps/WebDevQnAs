@@ -55,7 +55,8 @@ router.post("/login", passport.authenticate("local", {
 router.get("/logout", function(req, res){
     req.logout();
    	req.flash("success", "Logged you out!");
-    res.redirect("/");
+    // TODO: remove id??
+    res.redirect("/"); // retains :id, why??
 });
 
 // FLASHCARDS ROUTES
@@ -74,7 +75,7 @@ router.get('/flashcards', (req, res) => {
 //ADD QnA ROUTES
 router.get('/new', middleware.isLoggedIn, (req, res) => {
 	Qna.find({}, function(err, allQnas){
-    console.log(Qna)
+    // console.log(Qna)
 		if(err){
       req.flash("error", "Something went wrong, try again");
       console.log(err);
@@ -93,6 +94,7 @@ router.post('/new', middleware.isLoggedIn, (req, res) => {
         username: req.user.username
     };
    var newQna = {question: question, answer: answer, source: source, author: author};
+   console.log('REQ.BODY: ', req.body)
    Qna.create(newQna, function(err, newlyCreated){
         if(err){
             console.log(err);

@@ -9,7 +9,7 @@ const {User} = require('../models/user');
 const {Qna} = require('../models/qna');
 const {app, runServer, closeServer} = require('../app');
 const {TEST_DATABASE_URL} = require('../config');
-const middleware = require("../middleware/index");
+const middleware = require("../middleware/index");//Used??
 
 chai.use(chaiHttp);
 const request = require('supertest');
@@ -53,6 +53,10 @@ describe('Tests', function() {
 		return runServer(TEST_DATABASE_URL); 
 	});
 
+	beforeEach(function() {
+		return seedQnaData();
+	});
+
 	after(function() {
 		tearDownDb();
 		return closeServer();
@@ -75,6 +79,72 @@ describe('Tests', function() {
 				.expect(302)
 		});
 	});
+
+	describe('GET endpoint', function() {
+		it('should return all existing QnAs', function() {
+			let res;
+			return api
+			.get('/')
+			.then(function(_res) {
+				res = _res;
+				res.should.have.status(200);
+				return Qna.count();
+			})
+		});
+
+		it('should return QnAs with correct fields', function() {
+			Qna.find({}, function(err, questions){
+				questions.should.have.length.of.at.least(1);
+				questions.forEach(function(question) {
+					question.should.be.a('object');
+					// console.log('QUESTION: ', question)
+					question.should.include.keys(
+						'id', 'question', 'author', 'answer', 'source');
+				});
+				resQnas = questions[0];
+			})
+		});
+	});
+
+	describe('testing create new QnA', () => {
+		it('should create new QnA!!', () => {
+			console.log('TESTING')
+			api
+				.post('/login')
+				.send({username: 'dax2000', password: 'test'})
+				.then(res => {
+					expect(res).to.have.status(200);
+					done()
+					res
+						.post('/new')
+						.send({
+							question: faker.lorem.sentence(),
+							answer: faker.lorem.paragraph(),
+							source: faker.internet.domainName()
+						})
+						.expect(302)
+						.then(res => {
+							console.log('RES: ', res)
+						})
+				})
+				.then(res => {
+					// for(let key in res){ console.log(':',key) };
+					console.log('qna: ', res.res)
+					return res
+						.findOne({username: 'dax2000'})
+						.exec()
+						.then(qnas => {
+							describe('QnA exist', () => {
+								it('QnA should have user', () => {
+									console.log('QNA Author: ', qna.author.username)
+									qnas.author.should.not.have.length(0)
+								})
+							})
+						 })
+				})
+				
+		})
+	})
 
 });
 
