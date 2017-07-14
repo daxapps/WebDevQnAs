@@ -16,11 +16,13 @@ const request = require('supertest');
 const api = request(app);
 const authUser = request.agent(app);
 
+const totalQuestions = 10
+
 function seedQnaData() {
 	console.info('seeding QnA data');
 	const seedData = [];
 
-	for (let i=1; i<=10; i++) {
+	for (let i=1; i<=totalQuestions; i++) {
 		seedData.push(generateQnaData());
 	}
 	// this will return a promise
@@ -40,7 +42,7 @@ function generateQnaData() {
 
 function tearDownDb() {
 	console.warn('Deleting database');
-	
+
 	return mongoose.connection.dropDatabase();
 }
 
@@ -50,7 +52,7 @@ describe('Tests', function() {
 	before(function() {
   		console.log("test DB: " + TEST_DATABASE_URL)
 		seedQnaData();
-		return runServer(TEST_DATABASE_URL); 
+		return runServer(TEST_DATABASE_URL);
 	});
 
 	beforeEach(function() {
@@ -80,79 +82,74 @@ describe('Tests', function() {
 		});
 	});
 
-	describe('GET endpoint', function() {
+	describe('GET endpoint', function(done) {
 		it('should return all existing QnAs', function() {
-			let res;
 			return api
 			.get('/')
-			.then(function(_res) {
-				res = _res;
-				res.should.have.status(200);
-				return Qna.count();
+			.expect(function(_res) {
+				let res = _res.text,
+						cards = res.match(/div class="card"/g);
+
+				if(!_res.status === 200){ throw new Error('not a 200 status: ' + _res.status) }
+				if(!cards.length === totalQuestions){ throw new Error('incorrect cards amount') }
 			})
 		});
 
 		it('should return QnAs with correct fields', function() {
+			console.log('??');
 			Qna.find({}, function(err, questions){
-				questions.should.have.length.of.at.least(1);
-				questions.forEach(function(question) {
-					question.should.be.a('object');
-					// console.log('QUESTION: ', question)
-					question.should.include.keys(
-						'id', 'question', 'author', 'answer', 'source');
-				});
-				resQnas = questions[0];
+				console.log('questions:',questions.length);
+				// console.log(expect);
+				// expect(questions).to.have.length.above(2);
+				// questions.forEach(function(question) {
+				let question = questions[0];
+					// question.should.be.a('object');
+					console.log('QUESTION: ', question);
+					let tmp = 1;
+					tmp.should.equal(2);
+					question.should.have.all.keys('id', 'question', 'author', 'answer', 'source');
 			})
 		});
 	});
 
-	describe('testing create new QnA', () => {
-		it('should create new QnA!!', () => {
-			console.log('TESTING')
-			api
-				.post('/login')
-				.send({username: 'dax2000', password: 'test'})
-				.then(res => {
-					expect(res).to.have.status(200);
-					done()
-					res
-						.post('/new')
-						.send({
-							question: faker.lorem.sentence(),
-							answer: faker.lorem.paragraph(),
-							source: faker.internet.domainName()
-						})
-						.expect(302)
-						.then(res => {
-							console.log('RES: ', res)
-						})
-				})
-				.then(res => {
-					// for(let key in res){ console.log(':',key) };
-					console.log('qna: ', res.res)
-					return res
-						.findOne({username: 'dax2000'})
-						.exec()
-						.then(qnas => {
-							describe('QnA exist', () => {
-								it('QnA should have user', () => {
-									console.log('QNA Author: ', qna.author.username)
-									qnas.author.should.not.have.length(0)
-								})
-							})
-						 })
-				})
-				
-		})
-	})
+	// describe('testing create new QnA', () => {
+	// 	it('should create new QnA!!', () => {
+	// 		console.log('TESTING')
+	// 		api
+	// 			.post('/login')
+	// 			.send({username: 'dax2000', password: 'test'})
+	// 			.then(res => {
+	// 				expect(res).to.have.status(200);
+	// 				done()
+	// 				res
+	// 					.post('/new')
+	// 					.send({
+	// 						question: faker.lorem.sentence(),
+	// 						answer: faker.lorem.paragraph(),
+	// 						source: faker.internet.domainName()
+	// 					})
+	// 					.expect(302)
+	// 					.then(res => {
+	// 						console.log('RES: ', res)
+	// 					})
+	// 			})
+	// 			.then(res => {
+	// 				// for(let key in res){ console.log(':',key) };
+	// 				console.log('qna: ', res.res)
+	// 				return res
+	// 					.findOne({username: 'dax2000'})
+	// 					.exec()
+	// 					.then(qnas => {
+	// 						describe('QnA exist', () => {
+	// 							it('QnA should have user', () => {
+	// 								console.log('QNA Author: ', qna.author.username)
+	// 								qnas.author.should.not.have.length(0)
+	// 							})
+	// 						})
+	// 					 })
+	// 			})
+	//
+	// 	})
+	// })
 
 });
-
-
-
-
-
-
-
-
-
