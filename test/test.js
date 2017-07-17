@@ -100,11 +100,11 @@ describe('Tests', function() {
 			.then(
 				(res)=>{
 					let fieldObj = res[0].toObject(); //https://stackoverflow.com/questions/28442920/mongoose-find-method-returns-object-with-unwanted-properties
-					expect(fieldObj).to.have.all.keys('__v', '_id', 'question', 'author', 'answer', 'source');
+					fieldObj.should.have.all.keys('__v', '_id', 'question', 'author', 'answer', 'source');
 					done();
 				}
 			)
-			.catch( (e)=> { console.error(e); done(); } ) //catch & done to remove terminal warning
+			.catch( (e)=> { done(e); } ) //catch & done to remove terminal warning
 		});
 	});
 
