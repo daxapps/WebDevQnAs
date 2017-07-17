@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const faker = require('faker');
 
 const should = chai.should();
+const expect = chai.expect; //include globally
 
 const {User} = require('../models/user');
 const {Qna} = require('../models/qna');
@@ -26,7 +27,7 @@ function seedQnaData() {
 		seedData.push(generateQnaData());
 	}
 	// this will return a promise
-	return Qna.insertMany(seedData);
+	return Qna.insertMany(seedData).catch((e)=>console.error(e));
 }
 
 function generateQnaData() {
@@ -43,7 +44,7 @@ function generateQnaData() {
 function tearDownDb() {
 	console.warn('Deleting database');
 
-	return mongoose.connection.dropDatabase();
+	return mongoose.connection.dropDatabase().catch((e)=>console.error(e));
 }
 
 describe('Tests', function() {
@@ -61,7 +62,6 @@ describe('Tests', function() {
 
 	after(function() {
 		tearDownDb();
-		return closeServer();
 	});
 
 	describe('testing user authentication', () => {
@@ -95,22 +95,22 @@ describe('Tests', function() {
 			})
 		});
 
-		it('should return QnAs with correct fields', function() {
-			console.log('??');
-			Qna.find({}, function(err, questions){
-				console.log('questions:',questions.length);
-				// console.log(expect);
-				// expect(questions).to.have.length.above(2);
-				// questions.forEach(function(question) {
-				let question = questions[0];
-					// question.should.be.a('object');
-					console.log('QUESTION: ', question);
-					let tmp = 1;
-					tmp.should.equal(2);
-					question.should.have.all.keys('id', 'question', 'author', 'answer', 'source');
-			})
+		it('should return QnAs with correct fields', function(done) {
+			Qna.find() //promise only, no callbacks
+			.then(
+				(res)=>{
+					let fieldObj = res[0].toObject(); //https://stackoverflow.com/questions/28442920/mongoose-find-method-returns-object-with-unwanted-properties
+					expect(fieldObj).to.have.all.keys('__v', '_id', 'question', 'author', 'answer', 'source');
+					done();
+				}
+			)
+			.catch( (e)=> { console.error(e); done(); } ) //catch & done to remove terminal warning
 		});
 	});
+
+});
+
+
 
 	// describe('testing create new QnA', () => {
 	// 	it('should create new QnA!!', () => {
@@ -151,5 +151,3 @@ describe('Tests', function() {
 	//
 	// 	})
 	// })
-
-});
