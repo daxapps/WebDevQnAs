@@ -110,54 +110,45 @@ describe('Tests', function() {
 
 	describe('POST endpoint', () => {
 		it('should create new QnA!!', () => {
-			console.log('TESTING')
+			// console.log('TESTING')
 			return authUser
 				.post('/login')
 				.send({username: 'dax2000', password: 'test'})
 				.expect(302)	
 				.then(res => {
-					// expect(res).to.have.status(302);
-					// done()
 					return authUser
 						.post('/new')
 						.send({
 							question: faker.lorem.sentence(),
 							answer: faker.lorem.paragraph(),
-							source: faker.internet.domainName()
+							source: faker.internet.domainName(),
+							author: {
+						        id: authUser._id,
+						        username: authUser.username
+						    }
 						})
-				
-
-						// console.log('RES:', res.question)
-
 						.expect(302)
-						// .then(res => {
-						// 	console.log('RES: ', res)
-						// })
-						// .end((err, res) => {
-						// 	res.body.should.be.a('object');
-						// 	res.body.should.have.property('question');
-						// 	console.log('RESBODY: ', res.body)
-						// done();
-						// })
 				})
+				.catch(err => {
+					if (err) console.log('Something went wrong: ' + err)
+				});
+		});
+	});
+
+	describe('DELETE endpoint', () => {
+		it('should delete a QnA', () => {
+			return authUser
+				.post('/login')
+				.send({username: 'dax2000', password: 'test'})
+				.expect(302)	
 				.then(res => {
-					// for(let key in res){ console.log(':',key) };
-					// console.log('qna: ', res.res)
-					return Qna
-						// console.log('QNA: ', Qna)
-						.findOne({username: 'dax2000'})
-						.exec()
-						.then(qna => {
-							console.log('qna: ', qna)
-							describe('User exist', () => {
-								it('User should have question', () => {
-									console.log('USER: ', user)
-									// user.question.should.not.have.length(0)
-								})
-							})
-						 })
+					return authUser
+						.delete('/:id')
+						.expect(302)
 				})
-	
+				.catch(err => {
+					if (err) console.log('Something went wrong: ' + err)
+				});
 		})
 	})
 
