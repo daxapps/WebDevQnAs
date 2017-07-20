@@ -121,10 +121,8 @@ router.put("/:id", middleware.checkQuestionOwnership, function(req, res){
   Qna.findByIdAndUpdate(req.params.id, req.body.qnas, function(err, updatedQuestion){
    if(err){
        res.redirect("/");
-       // console.log(err);
    } else {
     req.flash("success", "Your question was edited.");
-
        res.redirect("/");
    }
   });
@@ -135,7 +133,6 @@ router.delete("/:id", middleware.checkQuestionOwnership, function(req, res){
    Qna.findByIdAndRemove(req.params.id, function(err){
     if(err){
         res.redirect("/");
-        // console.log(err);
     } else {
       req.flash("success", "Your question was deleted.");
         res.redirect("/");
