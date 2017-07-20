@@ -108,17 +108,17 @@ describe('Tests', function() {
 		});
 	});
 
-	describe('POST endpoint', (done) => {
+	describe('POST endpoint', () => {
 		it('should create new QnA!!', () => {
 			console.log('TESTING')
-			return api
+			return authUser
 				.post('/login')
 				.send({username: 'dax2000', password: 'test'})
 				.expect(302)	
 				.then(res => {
 					// expect(res).to.have.status(302);
 					// done()
-					api
+					return authUser
 						.post('/new')
 						.send({
 							question: faker.lorem.sentence(),
@@ -129,32 +129,34 @@ describe('Tests', function() {
 
 						// console.log('RES:', res.question)
 
-						// .expect(302)
+						.expect(302)
 						// .then(res => {
 						// 	console.log('RES: ', res)
 						// })
-						.end((err, res) => {
-							res.body.should.be.a('object');
-							res.body.should.have.property('question');
-							console.log('RESBODY: ', res.body)
-						done();
-						})
+						// .end((err, res) => {
+						// 	res.body.should.be.a('object');
+						// 	res.body.should.have.property('question');
+						// 	console.log('RESBODY: ', res.body)
+						// done();
+						// })
 				})
-				// .then(res => {
-				// 	// for(let key in res){ console.log(':',key) };
-				// 	console.log('qna: ', res.res)
-				// 	return res
-				// 		.findOne({username: 'dax2000'})
-				// 		.exec()
-				// 		.then(qnas => {
-				// 			describe('QnA exist', () => {
-				// 				it('QnA should have user', () => {
-				// 					console.log('QNA Author: ', qna.author.username)
-				// 					qnas.author.should.not.have.length(0)
-				// 				})
-				// 			})
-				// 		 })
-				// })
+				.then(res => {
+					// for(let key in res){ console.log(':',key) };
+					// console.log('qna: ', res.res)
+					return Qna
+						// console.log('QNA: ', Qna)
+						.findOne({username: 'dax2000'})
+						.exec()
+						.then(qna => {
+							console.log('qna: ', qna)
+							describe('User exist', () => {
+								it('User should have question', () => {
+									console.log('USER: ', user)
+									// user.question.should.not.have.length(0)
+								})
+							})
+						 })
+				})
 	
 		})
 	})
