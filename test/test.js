@@ -95,7 +95,7 @@ describe('Tests', function() {
 			})
 		});
 
-		it('should return QnAs with correct fields', function(done) {
+		it('should return QnA with correct fields', function(done) {
 			Qna.find() //promise only, no callbacks
 			.then(
 				(res)=>{
@@ -108,46 +108,55 @@ describe('Tests', function() {
 		});
 	});
 
+	describe('POST endpoint', (done) => {
+		it('should create new QnA!!', () => {
+			console.log('TESTING')
+			return api
+				.post('/login')
+				.send({username: 'dax2000', password: 'test'})
+				.expect(302)	
+				.then(res => {
+					// expect(res).to.have.status(302);
+					// done()
+					api
+						.post('/new')
+						.send({
+							question: faker.lorem.sentence(),
+							answer: faker.lorem.paragraph(),
+							source: faker.internet.domainName()
+						})
+				
+
+						// console.log('RES:', res.question)
+
+						// .expect(302)
+						// .then(res => {
+						// 	console.log('RES: ', res)
+						// })
+						.end((err, res) => {
+							res.body.should.be.a('object');
+							res.body.should.have.property('question');
+							console.log('RESBODY: ', res.body)
+						done();
+						})
+				})
+				// .then(res => {
+				// 	// for(let key in res){ console.log(':',key) };
+				// 	console.log('qna: ', res.res)
+				// 	return res
+				// 		.findOne({username: 'dax2000'})
+				// 		.exec()
+				// 		.then(qnas => {
+				// 			describe('QnA exist', () => {
+				// 				it('QnA should have user', () => {
+				// 					console.log('QNA Author: ', qna.author.username)
+				// 					qnas.author.should.not.have.length(0)
+				// 				})
+				// 			})
+				// 		 })
+				// })
+	
+		})
+	})
+
 });
-
-
-
-	// describe('testing create new QnA', () => {
-	// 	it('should create new QnA!!', () => {
-	// 		console.log('TESTING')
-	// 		api
-	// 			.post('/login')
-	// 			.send({username: 'dax2000', password: 'test'})
-	// 			.then(res => {
-	// 				expect(res).to.have.status(200);
-	// 				done()
-	// 				res
-	// 					.post('/new')
-	// 					.send({
-	// 						question: faker.lorem.sentence(),
-	// 						answer: faker.lorem.paragraph(),
-	// 						source: faker.internet.domainName()
-	// 					})
-	// 					.expect(302)
-	// 					.then(res => {
-	// 						console.log('RES: ', res)
-	// 					})
-	// 			})
-	// 			.then(res => {
-	// 				// for(let key in res){ console.log(':',key) };
-	// 				console.log('qna: ', res.res)
-	// 				return res
-	// 					.findOne({username: 'dax2000'})
-	// 					.exec()
-	// 					.then(qnas => {
-	// 						describe('QnA exist', () => {
-	// 							it('QnA should have user', () => {
-	// 								console.log('QNA Author: ', qna.author.username)
-	// 								qnas.author.should.not.have.length(0)
-	// 							})
-	// 						})
-	// 					 })
-	// 			})
-	//
-	// 	})
-	// })

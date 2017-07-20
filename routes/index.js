@@ -94,7 +94,7 @@ router.post('/new', middleware.isLoggedIn, (req, res) => {
         username: req.user.username
     };
    var newQna = {question: question, answer: answer, source: source, author: author};
-   console.log('REQ.BODY: ', req.body)
+   // console.log('REQ.BODY: ', req.body)
    Qna.create(newQna, function(err, newlyCreated){
         if(err){
             console.log(err);
@@ -121,7 +121,7 @@ router.put("/:id", middleware.checkQuestionOwnership, function(req, res){
   Qna.findByIdAndUpdate(req.params.id, req.body.qnas, function(err, updatedQuestion){
    if(err){
        res.redirect("/");
-       console.log(err);
+       // console.log(err);
    } else {
     req.flash("success", "Your question was edited.");
 
@@ -135,7 +135,7 @@ router.delete("/:id", middleware.checkQuestionOwnership, function(req, res){
    Qna.findByIdAndRemove(req.params.id, function(err){
     if(err){
         res.redirect("/");
-        console.log(err);
+        // console.log(err);
     } else {
       req.flash("success", "Your question was deleted.");
         res.redirect("/");
