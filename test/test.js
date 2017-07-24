@@ -108,47 +108,47 @@ describe('Tests', function() {
 		});
 	});
 
-	// describe('POST endpoint', () => {
-	// 	it('should create new QnA!!', () => {
-	// 		return authUser
-	// 		.post('/login')
-	// 		.send({username: 'dax2000', password: 'test'})
-	// 		.expect(302)	
-	// 		.then(res => {
-	// 			return authUser
-	// 			.post('/new')
-	// 			.send({
-	// 				question: faker.lorem.sentence(),
-	// 				answer: faker.lorem.paragraph(),
-	// 				source: faker.internet.domainName(),
-	// 				author: {
-	// 					id: authUser._id,
-	// 					username: authUser.username
-	// 				}
-	// 			})
-	// 			.expect(302)
-	// 		})
-	// 		.catch(err => {
-	// 			if (err) console.log('Something went wrong: ' + err)
-	// 		});
-	// 	});
-	// });
+	describe('POST endpoint', () => {
+		it('should create new QnA!!', () => {
+			return authUser
+			.post('/login')
+			.send({username: 'dax2000', password: 'test'})
+			.expect(302)	
+			.then(res => {
+				return authUser
+				.post('/new')
+				.send({
+					question: faker.lorem.sentence(),
+					answer: faker.lorem.paragraph(),
+					source: faker.internet.domainName(),
+					author: {
+						id: authUser._id,
+						username: authUser.username
+					}
+				})
+				.expect(302)
+			})
+			.catch(err => {
+				if (err) console.log('Something went wrong: ' + err)
+			});
+		});
+	});
 
-	// describe('DELETE endpoint', () => {
-	// 	it('should delete a QnA', () => {
-	// 		return authUser
-	// 		.post('/login')
-	// 		.send({username: 'dax2000', password: 'test'})
-	// 		.expect(302)	
-	// 		.then(res => {
-	// 			return authUser
-	// 			.delete('/:id')
-	// 			.expect(302)
-	// 		})
-	// 		.catch(err => {
-	// 			if (err) console.log('Something went wrong: ' + err)
-	// 		});
-	// 	})
-	// })
+	describe('DELETE endpoint', () => {
+		it('should delete a QnA', () => {
+			return authUser
+			.post('/login')
+			.send({username: 'dax2000', password: 'test'})
+			.expect(302)	
+			.then(res => {
+				return authUser
+				.delete('/:id')
+				.expect(302)
+			})
+			.catch(err => {
+				if (err) console.log('Something went wrong: ' + err)
+			});
+		})
+	})
 
 });
