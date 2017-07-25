@@ -175,12 +175,13 @@ h6 {
 }
 
 footer {
+	position: absolute;
 	color: white;
 	background-color: black;
 	height: 100px;
 	text-align: center;
 	padding-top: 20px;
-	margin-top: 30%;
+	margin-top: 10%;
 	width: 100% !important;
 }
 
