@@ -13,6 +13,10 @@ body {
   background-color: lightgray;
 }
 
+.container {
+	width: 100% !important;
+}
+
 .alert {
 	margin: 75px auto 20px;
 	max-width: 35%;
@@ -170,7 +174,7 @@ footer {
 	width: 100% !important;
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 870px) {
 
 	.card {
 		max-width: 100%;
@@ -189,7 +193,7 @@ footer {
 	}
 }
 
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 870px) {
 	
 	.card-btn {
 		float: right;
