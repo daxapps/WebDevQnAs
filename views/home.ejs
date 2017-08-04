@@ -3,7 +3,7 @@
  <header class="header-container">
    <div class="container text-center">
      <h1>Web Dev Interview Questions</h1> 
-     <p>Practice Interveiw Questions with Flashcards.</p>
+     <p>Practice Interview Questions with Flashcards.</p>
      <p><a href="/register">Sign Up</a> to Create Your Own.</p>     
    </div>
  </header>
@@ -17,6 +17,7 @@
       <% qnas.forEach(function(qna){ %>
         <div class="card">
             <h2 class="question"><%= qna.question %></h2>
+            <h3 class="category"><%= qna.category %></h3>
             <p class="hide-answer"><%= qna.answer %></p>
             <p><em>Source: <%= qna.source %></em></p>
             <p><em>Submitted By: <%= qna.author.username %></em></p>

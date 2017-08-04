@@ -86,14 +86,15 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 });
 
 router.post('/new', middleware.isLoggedIn, (req, res) => {
-	var question = req.body.question;
+  var question = req.body.question;
+	var category = req.body.category;
   var answer = req.body.answer;
 	var source = req.body.source;
 	var author = {
         id: req.user._id,
         username: req.user.username
     };
-   var newQna = {question: question, answer: answer, source: source, author: author};
+   var newQna = {question: question, category: category, answer: answer, source: source, author: author};
    // console.log('REQ.BODY: ', req.body)
    Qna.create(newQna, function(err, newlyCreated){
         if(err){

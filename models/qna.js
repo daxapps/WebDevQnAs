@@ -4,6 +4,7 @@ const ejs = require("ejs");
 
 const QnaSchema = new mongoose.Schema({
 	question: String,
+	category: String,
 	answer: String,
 	source: String,
 	author: {
@@ -19,6 +20,7 @@ QnaSchema.methods.apiRepr = function() {
 	return {
 		id: this._id,
 		question: this.question,
+		category: this.category,
 		answer: this.answer,
 		source: this.source,
 		author: user._id
