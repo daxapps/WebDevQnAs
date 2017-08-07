@@ -10,6 +10,26 @@ $("#show-answers-btn").on('click', function(event) {
 	};
 });
 
+$(".show-gen-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.gen-questions').toggleClass("hidden");
+})
+
+$(".show-html-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.html-questions').toggleClass("hidden");
+})
+
+$(".show-css-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.css-questions').toggleClass("hidden");
+})
+
+$(".show-js-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.js-questions').toggleClass("hidden");
+})
+
 function flip(show, hide) {
 	$(".flashcardEvent ." + hide + "").fadeOut(200);
 	$(".flashcardEvent ." + show + "").delay(220).fadeIn();

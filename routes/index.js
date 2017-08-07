@@ -18,6 +18,18 @@ router.get('/', (req, res) => {
   });
 });
 
+// router.get('/display-qnas', (req, res) => {
+//   // Get select questions from DB
+//   Qna.find({}, function(err, allQnas){
+//     if(err){
+//       req.flash("error", "Something went wrong, try again");
+//       console.log(err);
+//     } else {
+//       res.render("display-qnas",{qnas:allQnas, page: 'display-qnas'});
+//     }
+//   });
+// });
+
 // AUTH ROUTES
 //show sign up form
 router.get("/register", function(req, res){

@@ -1,0 +1,39 @@
+<% include partials/header %> 
+
+ <header class="header-container">
+   <div class="container text-center">
+     <h1>Web Dev Interview Questions</h1> 
+     <p>Practice Interview Questions with Flashcards.</p>
+     <p><a href="/register">Sign Up</a> to Create Your Own.</p>     
+   </div>
+ </header>
+ <div class="main container text-center">
+  <p>
+    <a id="show-answers-btn" class="btn btn-primary btn-large">Show Answers</a>
+    <a class="btn btn-primary btn-large" href="/new">Add New Question</a>
+  </p>
+  </br>
+
+  <div class="text-center js-questions">
+      <% qnas.forEach(function(qna){ %>
+        <% if(qna.category == "Javascript"){ %>
+        <div class="card">
+            <h2 class="question"><%= qna.question %></h2>
+            <h3 class="category"><%= qna.category %></h3>
+            <p class="hide-answer"><%= qna.answer %></p>
+            <p><em>Source: <%= qna.source %></em></p>
+            <p><em>Submitted By: <%= qna.author.username %></em></p>
+            
+            <form id="card-form" action="/<%= qna.id %>?_method=DELETE" method="POST">
+              <button class="card-btn btn btn-xs btn-danger">Delete</button>
+            </form>
+            <p><a class="card-btn btn btn-xs btn-warning" href="/<%= qna.id %>/edit">Edit</a></p>
+        </div>
+        </br>
+        <% } %>
+      <% }); %>
+    </div>
+  </div>
+
+<% include partials/footer %>
+

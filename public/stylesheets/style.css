@@ -13,6 +13,14 @@ body {
   background-color: lightgray;
 }
 
+.header-container {
+	background: url("brickwall.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+
 .container {
 	width: 100% !important;
 }
@@ -35,7 +43,7 @@ body {
 .header-container {
 	background-color: #4F5052;
 	width: 100% !important;
-	height: 800px;
+	height: 100vh;
 	color: #0DDFFF;
 }
 
@@ -69,6 +77,12 @@ h2 {
 	margin: 0;
 }
 
+.category {
+	margin: 0;
+	font-style: oblique;
+	font-size: 1.5em;
+}
+
 .demo-account {
 	margin: 10px 0 15px;
 	border: 2px solid white;
@@ -79,7 +93,29 @@ h6 {
 	font-size: 1.25em;
 }
 
+.hidden {
+	display: none;
+}
+
+.cat-label {
+	display: block;
+	margin: 20px auto;
+	height: 1.5em;
+	padding-top: 0.15em;
+	border: 2px solid gray;
+	border-radius: 5px;
+	max-width: 50%;
+	background-color: #0DDFFF;
+	color: white;
+	font-size: 2em;
+}
+
+.cat-label:hover {
+	text-decoration: none;
+}
+
 .card {
+	
 	border: 0.5px solid gray;
 	max-width: 60%;
 	margin: 10px auto;
@@ -93,7 +129,7 @@ h6 {
 
 .question {
 	display: inline-block;
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 
 }
 
@@ -175,7 +211,8 @@ h6 {
 }
 
 footer {
-	position: absolute;
+	right: 0;
+  	bottom: 0;
 	color: white;
 	background-color: black;
 	height: 100px;
@@ -186,6 +223,11 @@ footer {
 }
 
 @media screen and (max-width: 870px) {
+
+	h1 {
+	margin-top: 200px;
+	font-size: 2em;
+}
 
 	.card {
 		max-width: 100%;
@@ -201,6 +243,10 @@ footer {
 
 	.card>p>a {
 		margin-top: 10px;
+	}
+
+	.cat-label {
+		max-width: 80%;
 	}
 }
 
