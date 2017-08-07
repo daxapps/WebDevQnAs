@@ -33,6 +33,7 @@ function seedQnaData() {
 function generateQnaData() {
 	return {
 		question: faker.lorem.sentence(),
+		category: faker.lorem.word(),
 		answer: faker.lorem.paragraph(),
 		source: faker.internet.domainName(),
 		author: {
@@ -91,8 +92,7 @@ describe('Tests', function() {
 				cards = res.match(/div class="card"/g);
 
 				if(!_res.status === 200){ throw new Error('not a 200 status: ' + _res.status) }
-					if(!cards.length === totalQuestions){ throw new Error('incorrect cards amount') }
-				})
+			})
 		});
 
 		it('should return QnA with correct fields', function(done) {
@@ -100,7 +100,7 @@ describe('Tests', function() {
 			.then(
 				(res)=>{
 					let fieldObj = res[0].toObject(); //https://stackoverflow.com/questions/28442920/mongoose-find-method-returns-object-with-unwanted-properties
-					fieldObj.should.have.all.keys('__v', '_id', 'question', 'author', 'answer', 'source');
+					fieldObj.should.have.all.keys('__v', '_id', 'question', 'category', 'author', 'answer', 'source');
 					done();
 				}
 				)
@@ -119,6 +119,7 @@ describe('Tests', function() {
 				.post('/new')
 				.send({
 					question: faker.lorem.sentence(),
+					category: faker.lorem.word(),
 					answer: faker.lorem.paragraph(),
 					source: faker.internet.domainName(),
 					author: {
