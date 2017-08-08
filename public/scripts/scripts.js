@@ -30,6 +30,36 @@ $(".show-js-cat").on('click', function(event) {
 	$('.js-questions').toggleClass("hidden");
 })
 
+$(".show-testing-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.testing-questions').toggleClass("hidden");
+})
+
+$(".show-performance-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.performance-questions').toggleClass("hidden");
+})
+
+$(".show-network-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.network-questions').toggleClass("hidden");
+})
+
+$(".show-coding-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.coding-questions').toggleClass("hidden");
+})
+
+$(".show-fun-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.fun-questions').toggleClass("hidden");
+})
+
+$(".show-react-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.react-questions').toggleClass("hidden");
+})
+
 function flip(show, hide) {
 	$(".flashcardEvent ." + hide + "").fadeOut(200);
 	$(".flashcardEvent ." + show + "").delay(220).fadeIn();

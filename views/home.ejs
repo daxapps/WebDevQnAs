@@ -20,19 +20,7 @@
     <div class="text-center gen-questions hidden">
       <% qnas.forEach(function(qna){ %>
         <% if(qna.category == "General"){ %>
-        <div class="card">
-            <h2 class="question"><%= qna.question %></h2>
-            <h3 class="category"><%= qna.category %></h3>
-            <p class="hide-answer"><%= qna.answer %></p>
-            <p><em>Source: <%= qna.source %></em></p>
-            <p><em>Submitted By: <%= qna.author.username %></em></p>
-            
-            <form id="card-form" action="/<%= qna.id %>?_method=DELETE" method="POST">
-              <button class="card-btn btn btn-xs btn-danger">Delete</button>
-            </form>
-            <p><a class="card-btn btn btn-xs btn-warning" href="/<%= qna.id %>/edit">Edit</a></p>
-        </div>
-        </br>
+        <% include card %>
         <% } %>
       <% }); %>
     </div>
@@ -40,19 +28,7 @@
     <div class="text-center html-questions hidden">
       <% qnas.forEach(function(qna){ %>
         <% if(qna.category == "HTML"){ %>
-        <div class="card">
-            <h2 class="question"><%= qna.question %></h2>
-            <h3 class="category"><%= qna.category %></h3>
-            <p class="hide-answer"><%= qna.answer %></p>
-            <p><em>Source: <%= qna.source %></em></p>
-            <p><em>Submitted By: <%= qna.author.username %></em></p>
-            
-            <form id="card-form" action="/<%= qna.id %>?_method=DELETE" method="POST">
-              <button class="card-btn btn btn-xs btn-danger">Delete</button>
-            </form>
-            <p><a class="card-btn btn btn-xs btn-warning" href="/<%= qna.id %>/edit">Edit</a></p>
-        </div>
-        </br>
+        <% include card %>
         <% } %>
       <% }); %>
     </div>
@@ -60,19 +36,7 @@
     <div class="text-center css-questions hidden">
       <% qnas.forEach(function(qna){ %>
         <% if(qna.category == "CSS"){ %>
-        <div class="card">
-            <h2 class="question"><%= qna.question %></h2>
-            <h3 class="category"><%= qna.category %></h3>
-            <p class="hide-answer"><%= qna.answer %></p>
-            <p><em>Source: <%= qna.source %></em></p>
-            <p><em>Submitted By: <%= qna.author.username %></em></p>
-            
-            <form id="card-form" action="/<%= qna.id %>?_method=DELETE" method="POST">
-              <button class="card-btn btn btn-xs btn-danger">Delete</button>
-            </form>
-            <p><a class="card-btn btn btn-xs btn-warning" href="/<%= qna.id %>/edit">Edit</a></p>
-        </div>
-        </br>
+        <% include card %>
         <% } %>
       <% }); %>
     </div>
@@ -80,27 +44,58 @@
     <div class="text-center js-questions hidden">
       <% qnas.forEach(function(qna){ %>
         <% if(qna.category == "Javascript"){ %>
-        <div class="card">
-            <h2 class="question"><%= qna.question %></h2>
-            <h3 class="category"><%= qna.category %></h3>
-            <p class="hide-answer"><%= qna.answer %></p>
-            <p><em>Source: <%= qna.source %></em></p>
-            <p><em>Submitted By: <%= qna.author.username %></em></p>
-            
-            <form id="card-form" action="/<%= qna.id %>?_method=DELETE" method="POST">
-              <button class="card-btn btn btn-xs btn-danger">Delete</button>
-            </form>
-            <p><a class="card-btn btn btn-xs btn-warning" href="/<%= qna.id %>/edit">Edit</a></p>
-        </div>
-        </br>
+        <% include card %>
         <% } %>
       <% }); %>
     </div>
     <a class="cat-label show-testing-cat">Testing</a>
+    <div class="text-center testing-questions hidden">
+    <% qnas.forEach(function(qna){ %>
+        <% if(qna.category == "Testing"){ %>
+          <% include card %>
+        <% } %>
+      <% }); %>
+    </div>
     <a class="cat-label show-performance-cat">Performance</a>
+    <div class="text-center performance-questions hidden">
+    <% qnas.forEach(function(qna){ %>
+        <% if(qna.category == "Performance"){ %>
+          <% include card %>
+        <% } %>
+      <% }); %>
+    </div>
     <a class="cat-label show-network-cat">Network</a>
+    <div class="text-center network-questions hidden">
+    <% qnas.forEach(function(qna){ %>
+        <% if(qna.category == "Network"){ %>
+          <% include card %>
+        <% } %>
+      <% }); %>
+    </div>
     <a class="cat-label show-coding-cat">Coding</a>
+    <div class="text-center coding-questions hidden">
+    <% qnas.forEach(function(qna){ %>
+        <% if(qna.category == "Coding"){ %>
+          <% include card %>
+        <% } %>
+      <% }); %>
+    </div>
     <a class="cat-label show-fun-cat">Fun</a>
+    <div class="text-center fun-questions hidden">
+    <% qnas.forEach(function(qna){ %>
+        <% if(qna.category == "Fun"){ %>
+          <% include card %>
+        <% } %>
+      <% }); %>
+    </div>
+    <a class="cat-label show-react-cat">React</a>
+    <div class="text-center react-questions hidden">
+    <% qnas.forEach(function(qna){ %>
+        <% if(qna.category == "React"){ %>
+          <% include card %>
+        <% } %>
+      <% }); %>
+    </div>
 
   </div>    
  </div>
