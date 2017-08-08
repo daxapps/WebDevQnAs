@@ -22,7 +22,7 @@ The app will help web developers study interview questions with flashcards.
 * Deployed with Heroku
 
 ### Live Version
-https://secret-crag-39294.herokuapp.com/
+https://webdevqnas.herokuapp.com/
 
 ## Contributing
 
