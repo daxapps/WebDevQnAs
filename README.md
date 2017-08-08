@@ -4,10 +4,12 @@
 The app will help web developers study interview questions with flashcards.
 
 ## Screenshots
-![Home](https://i.imgur.com/aZGRSu3.png)
-![Home with answers](https://i.imgur.com/qGDyMJd.png)
-![Flashcards](https://i.imgur.com/T1EpkzI.png)
-![Add QnA](https://i.imgur.com/4as4C5I.png)
+![Home](http://i.imgur.com/PETe5hz.png)
+![Home Categories](http://i.imgur.com/qaqmjeD.png)
+![Home without answers](http://i.imgur.com/84FDvYc.png)
+![Home with answers](http://i.imgur.com/1x4ix2k.png)
+![Flashcards](http://i.imgur.com/uvhbiZP.png)
+![Add QnA](http://i.imgur.com/7ZMwnlq.png)
 
 ## Technology Used
 * HTML/CSS/jQuery
