@@ -13,6 +13,10 @@ body {
   background-color: lightgray;
 }
 
+input {
+	cursor: pointer;
+}
+
 .header-container {
 	background: url("brickwall.jpg") no-repeat center center fixed;
 	-webkit-background-size: cover;
@@ -36,6 +40,10 @@ body {
 	border-bottom: 0;
 }
 
+.navbar-nav>li>a {
+	color: white !important;
+}
+
 .navbar-nav>li>a:hover {
 	color: #0DDFFF !important;
 
@@ -44,11 +52,11 @@ body {
 	background-color: #4F5052;
 	width: 100% !important;
 	height: 100vh;
-	color: #0DDFFF;
+	color: white;
 }
 
 .header-container a {
-	color: #0DDFFF;
+	color: white;
 }
 
 h1 {
@@ -108,6 +116,7 @@ h6 {
 	background-color: #0DDFFF;
 	color: white;
 	font-size: 2em;
+	cursor: pointer;
 }
 
 .cat-label:hover {

@@ -60,6 +60,10 @@ $(".show-react-cat").on('click', function(event) {
 	$('.react-questions').toggleClass("hidden");
 })
 
+// if(currentUser.username === qna.author.username){
+// 	$('.delete-btn').hide();
+// }
+
 function flip(show, hide) {
 	$(".flashcardEvent ." + hide + "").fadeOut(200);
 	$(".flashcardEvent ." + show + "").delay(220).fadeIn();

@@ -6,7 +6,7 @@
     <p><em>Submitted By: <%= qna.author.username %></em></p>
     
     <form id="card-form" action="/<%= qna.id %>?_method=DELETE" method="POST">
-      <button class="card-btn btn btn-xs btn-danger">Delete</button>
+      <button class="card-btn btn btn-xs btn-danger delete-btn">Delete</button>
     </form>
     <p><a class="card-btn btn btn-xs btn-warning" href="/<%= qna.id %>/edit">Edit</a></p>
 </div>

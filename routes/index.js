@@ -61,8 +61,7 @@ router.post(
 router.get("/logout", function(req, res) {
   req.logout();
   req.flash("success", "Logged you out!");
-  // TODO: remove id??
-  res.redirect("/"); // retains :id, why??
+  res.redirect("/");
 });
 
 // FLASHCARDS ROUTES
