@@ -1,7 +1,8 @@
 # WebDevQnAs
 
 ## Summary
-The app will help web developers study interview questions with flashcards.
+The app will help web developers study interview questions with flashcards, and users can contribute questions and answers.  
+When studying for web developer interviews, I could not find a complete question and answer source to study from, so I made this app.
 
 ## Screenshots
 ![Home](http://i.imgur.com/PETe5hz.png)
