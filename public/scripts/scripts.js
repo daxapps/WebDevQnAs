@@ -60,6 +60,11 @@ $(".show-react-cat").on('click', function(event) {
 	$('.react-questions').toggleClass("hidden");
 })
 
+$(".show-algo-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.algo-questions').toggleClass("hidden");
+})
+
 function flip(show, hide) {
 	$(".flashcardEvent ." + hide + "").fadeOut(200);
 	$(".flashcardEvent ." + show + "").delay(220).fadeIn();
