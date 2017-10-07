@@ -118,12 +118,16 @@ h6 {
 }
 
 .card {
-	
 	border: 0.5px solid gray;
 	max-width: 60%;
 	margin: 10px auto;
 	padding: 10px;
 	background-color: white;
+}
+
+.card textarea {
+	width: 80%;
+	height: 7em;
 }
 
 .card-btn {
