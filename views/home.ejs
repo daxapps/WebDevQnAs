@@ -104,7 +104,14 @@
         <% } %>
       <% }); %>
     </div>
-
+    <a class="cat-label show-ds-cat">Data Structures</a>
+    <div class="text-center ds-questions hidden">
+    <% qnas.forEach(function(qna){ %>
+        <% if(qna.category == "Data Structures"){ %>
+          <% include card %>
+        <% } %>
+      <% }); %>
+    </div>
   </div>    
  </div>
 

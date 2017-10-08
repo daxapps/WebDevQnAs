@@ -65,6 +65,11 @@ $(".show-algo-cat").on('click', function(event) {
 	$('.algo-questions').toggleClass("hidden");
 })
 
+$(".show-ds-cat").on('click', function(event) {
+	event.preventDefault();
+	$('.ds-questions').toggleClass("hidden");
+})
+
 function flip(show, hide) {
 	$(".flashcardEvent ." + hide + "").fadeOut(200);
 	$(".flashcardEvent ." + show + "").delay(220).fadeIn();
